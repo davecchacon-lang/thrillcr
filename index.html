@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThrillCR — Adventures in Costa Rica</title>
+<meta name="description" content="Book the best adventure experiences in Costa Rica. Rafting, hiking, ATVs, canopy, surf and more.">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.nav-logo {
+  font-size: 20px; font-weight: 700;
+  color: #111; text-decoration: none; letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+  display: inline-block;
+  background: #00875A;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-left: 1px;
+  font-size: 18px;
+}
+
+.nav-center {
+  display: flex; align-items: center; gap: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  padding: 8px 8px 8px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.nav-search-field {
+  display: flex; flex-direction: column;
+  padding: 0 16px;
+  border-right: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.nav-search-field:last-of-type { border-right: none; }
+.nav-search-label { font-size: 11px; font-weight: 600; color: #111; }
+.nav-search-val { font-size: 13px; color: #717171; font-weight: 400; }
+
+.nav-search-btn {
+  background: #00875A;
+  border: none; border-radius: 50%;
+  width: 36px; height: 36px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-left: 8px;
+  transition: background 0.2s;
+}
+
+.nav-search-btn:hover { background: #006644; }
+
+.nav-search-btn svg { width: 16px; height: 16px; }
+
+.nav-right { display: flex; align-items: center; gap: 8px; }
+
+.nav-link {
+  font-size: 14px; font-weight: 500; color: #222;
+  text-decoration: none; padding: 8px 12px; border-radius: 22px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.nav-link:hover { background: #f5f5f5; }
+
+.lang-btn {
+  background: none; border: 1px solid #ddd;
+  border-radius: 22px; padding: 8px 14px;
+  font-size: 14px; font-weight: 500; color: #222;
+  cursor: pointer; transition: all 0.15s;
+  font-family: inherit;
+}
+
+.lang-btn:hover { border-color: #aaa; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 92vh; min-height: 600px;
+  display: flex; align-items: flex-end;
+  padding-bottom: 80px;
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1537094467371-a1741c6b2e58?w=1600&q=90') center/cover no-repeat;
+}
+
+.hero-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.0) 30%,
+    rgba(0,0,0,0.55) 75%,
+    rgba(0,0,0,0.75) 100%
+  );
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 56px;
+  max-width: 700px;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff; font-size: 12px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 5.5vw, 72px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+
+.hero-sub {
+  font-size: 17px; font-weight: 400;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.6; margin-bottom: 32px;
+  max-width: 500px;
+}
+
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-white {
+  background: #fff; color: #111;
+  text-decoration: none; padding: 14px 28px;
+  font-size: 15px; font-weight: 600;
+  border-radius: 12px; display: inline-block;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.btn-white:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+.btn-ghost-white {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: #fff; text-decoration: none;
+  padding: 14px 28px; font-size: 15px; font-weight: 500;
+  border-radius: 12px; display: inline-block;
+  transition: background 0.15s;
+}
+
+.btn-ghost-white:hover { background: rgba(255,255,255,0.25); }
+
+.hero-stats {
+  position: absolute; bottom: 80px; right: 56px; z-index: 2;
+  display: flex; gap: 0;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px; overflow: hidden;
+}
+
+.hero-stat {
+  padding: 16px 24px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+}
+
+.hero-stat:last-child { border-right: none; }
+
+.stat-n {
+  font-size: 22px; font-weight: 700;
+  color: #fff; line-height: 1;
+}
+
+.stat-l {
+  font-size: 11px; color: rgba(255,255,255,0.65);
+  margin-top: 3px; font-weight: 400;
+}
+
+/* ── CATEGORIES ── */
+.cats {
+  padding: 28px 56px 0;
+  display: flex; gap: 8px; align-items: center;
+  overflow-x: auto; scrollbar-width: none;
+  border-bottom: 1px solid #ebebeb;
+  position: sticky; top: 72px; z-index: 100;
+  background: #fff;
+}
+
+.cats::-webkit-scrollbar { display: none; }
+
+.cat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 16px 14px;
+  cursor: pointer; transition: opacity 0.15s;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap; opacity: 0.55;
+  text-decoration: none; color: inherit;
+  flex-shrink: 0;
+}
+
+.cat.active, .cat:hover { opacity: 1; }
+.cat.active { border-bottom-color: #222; }
+
+.cat-icon { font-size: 22px; }
+.cat-name { font-size: 12px; font-weight: 500; color: #222; }
+
+/* ── SECTION ── */
+.section { padding: 48px 56px; }
+
+.sec-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 28px;
+}
+
+.sec-title {
+  font-size: 22px; font-weight: 700;
+  letter-spacing: -0.5px; color: #111;
+}
+
+.sec-link {
+  font-size: 14px; font-weight: 600; color: #111;
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+
+.sec-link:hover { color: #00875A; }
+
+/* ── EXPERIENCE CARDS ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  cursor: pointer; text-decoration: none; color: inherit;
+  display: block;
+}
+
+.card-img-wrap {
+  position: relative;
+  border-radius: 16px; overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: #f0f0f0;
+}
+
+.card-img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-img { transform: scale(1.04); }
+
+.card-heart {
+  position: absolute; top: 12px; right: 12px;
+  background: none; border: none; cursor: pointer;
+  font-size: 22px; line-height: 1;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+  transition: transform 0.15s;
+}
+
+.card-heart:hover { transform: scale(1.15); }
+
+.card-badge {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(4px);
+  color: #111; font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: 100px;
+}
+
+.card-body { padding: 12px 4px 0; }
+
+.card-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 2px;
+}
+
+.card-location {
+  font-size: 14px; font-weight: 600; color: #111;
+  line-height: 1.3;
+}
+
+.card-rating {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 13px; font-weight: 500; color: #111;
+  flex-shrink: 0; margin-left: 8px;
+}
+
+.card-title {
+  font-size: 14px; color: #717171; font-weight: 400;
+  margin-bottom: 4px; line-height: 1.4;
+}
+
+.card-price {
+  font-size: 14px; color: #111; font-weight: 400;
+}
+
+.card-price strong { font-weight: 600; }
+
+/* ── ZONES (full-bleed photo grid) ── */
+.zones-section { padding: 48px 56px; }
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 280px 280px;
+  gap: 8px;
+}
+
+.zone-card {
+  position: relative; border-radius: 16px;
+  overflow: hidden; cursor: pointer;
+  text-decoration: none; display: block;
+}
+
+.zone-card:first-child {
+  grid-row: 1 / 3;
+  border-radius: 20px;
+}
+
+.zone-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.5s;
+}
+
+.zone-card:hover img { transform: scale(1.05); }
+
+.zone-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 20px;
+}
+
+.zone-name {
+  font-size: 18px; font-weight: 700;
+  color: #fff; line-height: 1;
+}
+
+.zone-count {
+  font-size: 13px; color: rgba(255,255,255,0.75);
+  margin-top: 3px; font-weight: 400;
+}
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  background: #f7f7f7;
+  padding: 64px 56px;
+}
+
+.how-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 48px; margin-top: 36px;
+}
+
+.how-step { }
+
+.how-num {
+  width: 40px; height: 40px;
+  background: #111; color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.how-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #111; }
+.how-desc { font-size: 14px; color: #717171; line-height: 1.7; }
+
+/* ── PROVIDER STRIP ── */
+.provider-strip {
+  padding: 56px;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 40px; border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.provider-text h2 {
+  font-size: 26px; font-weight: 700;
+  letter-spacing: -0.5px; color: #111;
+  max-width: 420px; line-height: 1.3;
+}
+
+.provider-text p {
+  font-size: 15px; color: #717171;
+  margin-top: 8px; max-width: 380px; line-height: 1.6;
+}
+
+.btn-dark {
+  background: #111; color: #fff;
+  text-decoration: none; padding: 14px 28px;
+  font-size: 15px; font-weight: 600;
+  border-radius: 12px; white-space: nowrap;
+  flex-shrink: 0; display: inline-block;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.btn-dark:hover { background: #333; transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 48px 56px 32px;
+  border-top: 1px solid #ebebeb;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 32px;
+}
+
+.footer-logo {
+  font-size: 18px; font-weight: 700;
+  color: #111; text-decoration: none;
+  letter-spacing: -0.5px; display: block; margin-bottom: 8px;
+}
+
+.footer-logo span {
+  background: #00875A; color: #fff;
+  padding: 1px 6px; border-radius: 5px;
+  font-size: 16px;
+}
+
+footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; }
+
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+
+.footer-links a {
+  color: #717171; text-decoration: none;
+  font-size: 14px; transition: color 0.15s;
+}
+
+.footer-links a:hover { color: #111; text-decoration: underline; }
+
+/* ── MOBILE ── */
+@media (max-width: 860px) {
+  .nav-center { display: none; }
+  .nav { padding: 0 20px; }
+  .hero-content { padding: 0 24px; }
+  .hero-stats { display: none; }
+  .cats { padding: 0 20px; }
+  .section { padding: 40px 24px; }
+  .zones-section { padding: 40px 24px; }
+  .zones-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .zone-card:first-child { grid-row: auto; }
+  .how-section { padding: 48px 24px; }
+  .how-grid { grid-template-columns: 1fr; gap: 32px; }
+  .provider-strip { flex-direction: column; padding: 40px 24px; }
+  footer { padding: 40px 24px 24px; flex-direction: column; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tag    { animation: fadeUp 0.45s ease both; }
+.hero h1     { animation: fadeUp 0.45s 0.08s ease both; }
+.hero-sub    { animation: fadeUp 0.45s 0.16s ease both; }
+.hero-btns   { animation: fadeUp 0.45s 0.24s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">Thrill<span>CR</span></a>
+
+  <div class="nav-center">
+    <div class="nav-search-field">
+      <span class="nav-search-label" data-en="Where" data-es="Dónde">Where</span>
+      <span class="nav-search-val" data-en="Costa Rica" data-es="Costa Rica">Costa Rica</span>
+    </div>
+    <div class="nav-search-field">
+      <span class="nav-search-label" data-en="Category" data-es="Categoría">Category</span>
+      <span class="nav-search-val" data-en="Any experience" data-es="Cualquier experiencia">Any experience</span>
+    </div>
+    <div class="nav-search-field" style="border-right:none">
+      <span class="nav-search-label" data-en="Budget" data-es="Presupuesto">Budget</span>
+      <span class="nav-search-val" data-en="Any price" data-es="Cualquier precio">Any price</span>
+    </div>
+    <button class="nav-search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="nav-right">
+    <a href="#providers" class="nav-link" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">ES</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-en="PURA VIDA · COSTA RICA" data-es="PURA VIDA · COSTA RICA">PURA VIDA · COSTA RICA</div>
+    <h1 data-en="Adventures worth every second" data-es="Aventuras que valen cada segundo">Adventures worth every second</h1>
+    <p class="hero-sub" data-en="Book verified adventure experiences across Costa Rica — from raging rivers to cloud forests. Instant confirmation, local providers." data-es="Reservá experiencias de aventura verificadas en toda Costa Rica — desde ríos caudalosos hasta bosques nubosos. Confirmación instantánea, proveedores locales.">Book verified adventure experiences across Costa Rica — from raging rivers to cloud forests. Instant confirmation, local providers.</p>
+    <div class="hero-btns">
+      <a href="#experiences" class="btn-white" data-en="Explore experiences" data-es="Ver experiencias">Explore experiences</a>
+      <a href="#how" class="btn-ghost-white" data-en="How it works" data-es="Cómo funciona">How it works</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-n">50+</div>
+      <div class="stat-l" data-en="Experiences" data-es="Experiencias">Experiences</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-n">8</div>
+      <div class="stat-l" data-en="Zones" data-es="Zonas">Zones</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-n">4.9★</div>
+      <div class="stat-l" data-en="Avg rating" data-es="Rating prom.">Avg rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<div class="cats">
+  <a href="#" class="cat active" onclick="setcat(this)">
+    <span class="cat-icon">🌿</span>
+    <span class="cat-name" data-en="All" data-es="Todos">All</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🌊</span>
+    <span class="cat-name" data-en="Rafting" data-es="Rafting">Rafting</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🌲</span>
+    <span class="cat-name" data-en="Canopy" data-es="Canopy">Canopy</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🏍️</span>
+    <span class="cat-name" data-en="ATVs" data-es="Cuadras">ATVs</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">⛰️</span>
+    <span class="cat-name" data-en="Hiking" data-es="Senderismo">Hiking</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🏄</span>
+    <span class="cat-name" data-en="Surf" data-es="Surf">Surf</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🚣</span>
+    <span class="cat-name" data-en="Kayak" data-es="Kayak">Kayak</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🐒</span>
+    <span class="cat-name" data-en="Wildlife" data-es="Fauna">Wildlife</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">🌋</span>
+    <span class="cat-name" data-en="Volcanoes" data-es="Volcanes">Volcanoes</span>
+  </a>
+  <a href="#" class="cat" onclick="setcat(this)">
+    <span class="cat-icon">💧</span>
+    <span class="cat-name" data-en="Waterfalls" data-es="Cascadas">Waterfalls</span>
+  </a>
+</div>
+
+<!-- EXPERIENCES -->
+<section class="section" id="experiences">
+  <div class="sec-head">
+    <h2 class="sec-title" data-en="Top-rated experiences" data-es="Experiencias mejor valoradas">Top-rated experiences</h2>
+    <a href="#" class="sec-link" data-en="Show all" data-es="Ver todas">Show all</a>
+  </div>
+  <div class="cards">
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=85" alt="Pacuare rafting">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Rafting</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">Turrialba, Costa Rica</div>
+          <div class="card-rating">★ 4.9</div>
+        </div>
+        <div class="card-title" data-en="Pacuare River · Class III/IV · Full day" data-es="Río Pacuare · Clase III/IV · Día completo">Pacuare River · Class III/IV · Full day</div>
+        <div class="card-price" data-en="<strong>$95</strong> / person" data-es="<strong>$95</strong> / persona"><strong>$95</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=85" alt="Canopy Monteverde">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Canopy</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">Monteverde, Costa Rica</div>
+          <div class="card-rating">★ 4.8</div>
+        </div>
+        <div class="card-title" data-en="Cloud Forest Zipline · 12 cables · 3 hrs" data-es="Canopy Bosque Nuboso · 12 cables · 3 hrs">Cloud Forest Zipline · 12 cables · 3 hrs</div>
+        <div class="card-price" data-en="<strong>$65</strong> / person" data-es="<strong>$65</strong> / persona"><strong>$65</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=600&q=85" alt="ATV Arenal">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">ATVs</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">La Fortuna, Costa Rica</div>
+          <div class="card-rating">★ 4.7</div>
+        </div>
+        <div class="card-title" data-en="Arenal Volcano ATV · Lava fields · 4 hrs" data-es="ATV Volcán Arenal · Campos de lava · 4 hrs">Arenal Volcano ATV · Lava fields · 4 hrs</div>
+        <div class="card-price" data-en="<strong>$85</strong> / person" data-es="<strong>$85</strong> / persona"><strong>$85</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=85" alt="Corcovado">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Hiking</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">Corcovado, Costa Rica</div>
+          <div class="card-rating">★ 5.0</div>
+        </div>
+        <div class="card-title" data-en="Corcovado National Park · Trek · Full day" data-es="Parque Corcovado · Trekking · Día completo">Corcovado National Park · Trek · Full day</div>
+        <div class="card-price" data-en="<strong>$120</strong> / person" data-es="<strong>$120</strong> / persona"><strong>$120</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&q=85" alt="Surf Jaco">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Surf</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">Jacó, Costa Rica</div>
+          <div class="card-rating">★ 4.8</div>
+        </div>
+        <div class="card-title" data-en="Surf Lesson · Beginners welcome · 2 hrs" data-es="Clase de Surf · Principiantes · 2 hrs">Surf Lesson · Beginners welcome · 2 hrs</div>
+        <div class="card-price" data-en="<strong>$55</strong> / person" data-es="<strong>$55</strong> / persona"><strong>$55</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=85" alt="Bioluminescence kayak">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Kayak</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">Nicoya, Costa Rica</div>
+          <div class="card-rating">★ 4.9</div>
+        </div>
+        <div class="card-title" data-en="Bioluminescent Bay · Night kayak · 3 hrs" data-es="Bahía Bioluminiscente · Nocturno · 3 hrs">Bioluminescent Bay · Night kayak · 3 hrs</div>
+        <div class="card-price" data-en="<strong>$70</strong> / person" data-es="<strong>$70</strong> / persona"><strong>$70</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1564415054878-a30d22e7b665?w=600&q=85" alt="Arenal volcano">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Volcano</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">La Fortuna, Costa Rica</div>
+          <div class="card-rating">★ 4.9</div>
+        </div>
+        <div class="card-title" data-en="Arenal Volcano Night Walk · Guided · 3 hrs" data-es="Caminata Nocturna Volcán Arenal · 3 hrs">Arenal Volcano Night Walk · Guided · 3 hrs</div>
+        <div class="card-price" data-en="<strong>$45</strong> / person" data-es="<strong>$45</strong> / persona"><strong>$45</strong> / person</div>
+      </div>
+    </a>
+
+    <a href="experience.html" class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?w=600&q=85" alt="Monteverde">
+        <button class="card-heart">🤍</button>
+        <span class="card-badge">Wildlife</span>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-location">Monteverde, Costa Rica</div>
+          <div class="card-rating">★ 4.8</div>
+        </div>
+        <div class="card-title" data-en="Cloud Forest Wildlife Tour · Dawn · 4 hrs" data-es="Tour Fauna Bosque Nuboso · Amanecer · 4 hrs">Cloud Forest Wildlife Tour · Dawn · 4 hrs</div>
+        <div class="card-price" data-en="<strong>$75</strong> / person" data-es="<strong>$75</strong> / persona"><strong>$75</strong> / person</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ZONES -->
+<section class="zones-section" id="zones">
+  <div class="sec-head">
+    <h2 class="sec-title" data-en="Explore by zone" data-es="Explorar por zona">Explore by zone</h2>
+  </div>
+  <div class="zones-grid">
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1564415054878-a30d22e7b665?w=700&q=85" alt="La Fortuna">
+      <div class="zone-overlay">
+        <div class="zone-name">La Fortuna</div>
+        <div class="zone-count" data-en="12 experiences" data-es="12 experiencias">12 experiences</div>
+      </div>
+    </a>
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=85" alt="Monteverde">
+      <div class="zone-overlay">
+        <div class="zone-name">Monteverde</div>
+        <div class="zone-count" data-en="8 experiences" data-es="8 experiencias">8 experiences</div>
+      </div>
+    </a>
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=85" alt="Manuel Antonio">
+      <div class="zone-overlay">
+        <div class="zone-name">Manuel Antonio</div>
+        <div class="zone-count" data-en="10 experiences" data-es="10 experiencias">10 experiences</div>
+      </div>
+    </a>
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=500&q=85" alt="Turrialba">
+      <div class="zone-overlay">
+        <div class="zone-name">Turrialba</div>
+        <div class="zone-count" data-en="7 experiences" data-es="7 experiencias">7 experiences</div>
+      </div>
+    </a>
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1473181488821-2d23949a045a?w=500&q=85" alt="Jacó">
+      <div class="zone-overlay">
+        <div class="zone-name">Jacó</div>
+        <div class="zone-count" data-en="9 experiences" data-es="9 experiencias">9 experiences</div>
+      </div>
+    </a>
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?w=500&q=85" alt="Nicoya">
+      <div class="zone-overlay">
+        <div class="zone-name">Nicoya</div>
+        <div class="zone-count" data-en="6 experiences" data-es="6 experiencias">6 experiences</div>
+      </div>
+    </a>
+    <a href="#" class="zone-card">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=85" alt="Corcovado">
+      <div class="zone-overlay">
+        <div class="zone-name">Corcovado</div>
+        <div class="zone-count" data-en="5 experiences" data-es="5 experiencias">5 experiences</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <h2 class="sec-title" data-en="How ThrillCR works" data-es="Cómo funciona ThrillCR">How ThrillCR works</h2>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-title" data-en="Browse & choose" data-es="Explorá y elegí">Browse & choose</div>
+      <p class="how-desc" data-en="Filter experiences by zone, category, price, or difficulty level. Real photos, verified reviews, and full itineraries for every listing." data-es="Filtrá por zona, categoría, precio o dificultad. Fotos reales, reseñas verificadas e itinerarios completos en cada listado.">Filter experiences by zone, category, price, or difficulty level. Real photos, verified reviews, and full itineraries for every listing.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-title" data-en="Book & pay securely" data-es="Reservá y pagá seguro">Book & pay securely</div>
+      <p class="how-desc" data-en="Select your date and group size. Pay with credit card or SINPE Móvil. Instant email confirmation — no waiting, no phone calls." data-es="Elegí tu fecha y grupo. Pagá con tarjeta o SINPE Móvil. Confirmación instantánea por email — sin esperas, sin llamadas.">Select your date and group size. Pay with credit card or SINPE Móvil. Instant email confirmation — no waiting, no phone calls.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-title" data-en="Show up & experience it" data-es="Aparecé y viví la aventura">Show up & experience it</div>
+      <p class="how-desc" data-en="Bring your booking confirmation. The provider takes care of everything else. Afterwards, share your review to help other adventurers." data-es="Traé tu confirmación. El proveedor se encarga del resto. Después, compartí tu reseña para ayudar a otros aventureros.">Bring your booking confirmation. The provider takes care of everything else. Afterwards, share your review to help other adventurers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROVIDER STRIP -->
+<div class="provider-strip" id="providers">
+  <div class="provider-text">
+    <h2 data-en="Are you an adventure provider in Costa Rica?" data-es="¿Sos un proveedor de aventuras en Costa Rica?">Are you an adventure provider in Costa Rica?</h2>
+    <p data-en="List your experience on ThrillCR and reach thousands of travelers looking for exactly what you offer. No upfront cost — we only earn when you do." data-es="Listá tu experiencia en ThrillCR y llegá a miles de viajeros que buscan exactamente lo que ofrecés. Sin costo inicial — solo ganamos cuando vos ganás.">List your experience on ThrillCR and reach thousands of travelers looking for exactly what you offer. No upfront cost — we only earn when you do.</p>
+  </div>
+  <a href="#" class="btn-dark" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="/" class="footer-logo">Thrill<span>CR</span></a>
+    <p data-en="The adventure marketplace of Costa Rica. Book verified experiences with trusted local providers." data-es="El marketplace de aventuras de Costa Rica. Reservá experiencias verificadas con proveedores locales de confianza.">&copy; 2025 ThrillCR · The adventure marketplace of Costa Rica.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#" data-en="About" data-es="Nosotros">About</a>
+    <a href="#providers" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
+    <a href="#" data-en="Contact" data-es="Contacto">Contact</a>
+    <a href="#" data-en="Privacy" data-es="Privacidad">Privacy</a>
+  </div>
+</footer>
+
+<script>
+  let lang = 'en';
+
+  function toggleLang() {
+    lang = lang === 'en' ? 'es' : 'en';
+    document.getElementById('lang-btn').textContent = lang === 'en' ? 'ES' : 'EN';
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const t = el.getAttribute('data-' + lang);
+      if (t) el.innerHTML = t;
+    });
+  }
+
+  function setcat(el) {
+    event.preventDefault();
+    document.querySelectorAll('.cat').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
