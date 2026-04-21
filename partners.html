@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner with ThrillCR — List Your Adventure Experience</title>
+<meta name="description" content="Join Costa Rica's adventure marketplace. List your rafting, canopy, ATV, hiking or surf experience and start receiving bookings from international travelers.">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+:root {
+  --forest: #1A3A2A;
+  --green:  #00875A;
+  --lime:   #7AB648;
+  --sand:   #F5EFE6;
+  --white:  #ffffff;
+  --ink:    #111111;
+  --muted:  #6B7569;
+  --light:  #F0F4F0;
+  --border: #e8e8e8;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(26,42,34,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.nav-logo {
+  font-size: 20px; font-weight: 700;
+  color: #fff; text-decoration: none; letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+  display: inline-block;
+  background: var(--green);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-left: 1px;
+  font-size: 18px;
+}
+
+.nav-links {
+  display: flex; gap: 32px; align-items: center; list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none; font-size: 14px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: #fff; }
+
+.nav-cta {
+  background: var(--lime) !important;
+  color: var(--forest) !important;
+  padding: 9px 22px !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: opacity 0.2s !important;
+}
+
+.nav-cta:hover { opacity: 0.9 !important; }
+
+.lang-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.65); padding: 6px 14px;
+  border-radius: 100px; font-family: inherit;
+  font-size: 13px; cursor: pointer; transition: all 0.2s;
+}
+.lang-btn:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--forest);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 68px;
+  overflow: hidden;
+}
+
+/* Decorative circles */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(122,182,72,0.12);
+  top: -150px; right: -100px;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(122,182,72,0.08);
+  top: -50px; right: 0px;
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  padding: 80px 48px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(122,182,72,0.12);
+  border: 1px solid rgba(122,182,72,0.25);
+  color: var(--lime); font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--lime);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 4.5vw, 62px);
+  font-weight: 700; line-height: 1.05;
+  color: #fff; letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+.hero h1 em { font-style: normal; color: var(--lime); }
+
+.hero-sub {
+  font-size: 17px; font-weight: 300;
+  color: rgba(255,255,255,0.65); line-height: 1.7;
+  max-width: 480px; margin-bottom: 36px;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+}
+
+.btn-lime {
+  background: var(--lime); color: var(--forest);
+  text-decoration: none; padding: 14px 32px;
+  font-size: 15px; font-weight: 600;
+  border-radius: 100px; display: inline-block;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-lime:hover { opacity: 0.92; transform: translateY(-1px); }
+
+.btn-ghost {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none; padding: 14px 24px;
+  font-size: 15px; font-weight: 400;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 100px; display: inline-block;
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+.hero-stats {
+  display: flex; gap: 36px; margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.hstat-n {
+  font-size: 26px; font-weight: 700;
+  color: var(--lime); line-height: 1;
+}
+
+.hstat-l {
+  font-size: 12px; color: rgba(255,255,255,0.45);
+  margin-top: 3px; font-weight: 300;
+}
+
+/* Hero form card */
+.hero-form-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+}
+
+.form-title {
+  font-size: 20px; font-weight: 700;
+  color: var(--forest); margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.form-sub {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 24px; font-weight: 300;
+  line-height: 1.5;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--forest); margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px; font-size: 14px;
+  font-family: inherit; color: var(--ink);
+  background: #fff; transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--green);
+}
+
+.form-textarea { min-height: 80px; resize: vertical; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.btn-submit {
+  width: 100%; background: var(--green); color: #fff;
+  border: none; border-radius: 100px;
+  padding: 14px; font-size: 15px; font-weight: 600;
+  font-family: inherit; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+
+.btn-submit:hover { background: #006644; transform: translateY(-1px); }
+
+.form-note {
+  font-size: 11px; color: var(--muted);
+  text-align: center; margin-top: 12px;
+  line-height: 1.5; font-weight: 300;
+}
+
+/* ── WHY THRILLCR ── */
+.why { padding: 96px 48px; background: #fff; }
+
+.section-header { max-width: 1200px; margin: 0 auto 56px; }
+
+.section-kicker {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--green); margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(30px, 3.5vw, 42px);
+  font-weight: 700; color: var(--forest);
+  letter-spacing: -0.8px; line-height: 1.1;
+}
+
+.section-title span { color: var(--green); }
+
+.why-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.why-card {
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.why-card:hover::before { transform: scaleX(1); }
+.why-card:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+}
+
+.why-icon {
+  width: 48px; height: 48px;
+  background: var(--light);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 18px;
+}
+
+.why-title {
+  font-size: 17px; font-weight: 700;
+  color: var(--forest); margin-bottom: 8px;
+}
+
+.why-desc {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ── HOW IT WORKS ── */
+.how {
+  background: var(--forest);
+  padding: 96px 48px;
+}
+
+.how-inner { max-width: 1200px; margin: 0 auto; }
+
+.how-inner .section-kicker { color: var(--lime); }
+.how-inner .section-title { color: #fff; }
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 56px;
+  position: relative;
+}
+
+.how-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px; left: 64px; right: 64px; height: 1px;
+  background: rgba(122,182,72,0.25);
+  z-index: 0;
+}
+
+.how-step {
+  text-align: center;
+  padding: 0 20px;
+  position: relative; z-index: 1;
+}
+
+.step-circle {
+  width: 56px; height: 56px;
+  background: var(--lime);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: var(--forest);
+  margin: 0 auto 20px;
+  position: relative; z-index: 1;
+}
+
+.step-title {
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  line-height: 1.65; font-weight: 300;
+}
+
+/* ── REQUIREMENTS ── */
+.reqs { padding: 96px 48px; background: var(--light); }
+
+.reqs-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: start;
+}
+
+.reqs-left { }
+
+.reqs-list { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+
+.req-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 18px 20px;
+  background: #fff; border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.req-check {
+  width: 24px; height: 24px; flex-shrink: 0;
+  background: var(--green); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 700;
+  margin-top: 1px;
+}
+
+.req-text { }
+.req-title { font-size: 14px; font-weight: 600; color: var(--forest); margin-bottom: 2px; }
+.req-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.5; }
+
+.reqs-right { }
+
+.commission-card {
+  background: var(--forest);
+  border-radius: 20px;
+  padding: 36px 32px;
+  color: #fff;
+}
+
+.commission-title {
+  font-size: 20px; font-weight: 700;
+  color: #fff; margin-bottom: 4px;
+}
+
+.commission-sub {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  margin-bottom: 28px; font-weight: 300;
+}
+
+.commission-rows { margin-bottom: 28px; }
+
+.comm-row {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.comm-row:last-child { border-bottom: none; }
+
+.comm-label { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 300; }
+
+.comm-val {
+  font-size: 14px; font-weight: 700;
+  color: var(--lime);
+}
+
+.comm-val-white { color: rgba(255,255,255,0.5); font-weight: 400; }
+
+.commission-cta {
+  background: var(--lime); color: var(--forest);
+  border: none; border-radius: 100px;
+  width: 100%; padding: 14px;
+  font-size: 15px; font-weight: 600;
+  font-family: inherit; cursor: pointer;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  display: block; text-align: center;
+}
+
+.commission-cta:hover { opacity: 0.9; }
+
+.payout-note {
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  text-align: center; margin-top: 12px;
+  font-weight: 300; line-height: 1.5;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 96px 48px; background: #fff; }
+
+.testimonials-inner { max-width: 1200px; margin: 0 auto; }
+
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+
+.tcard {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.tcard-stars {
+  color: #e8a020; font-size: 14px; margin-bottom: 14px;
+  letter-spacing: 2px;
+}
+
+.tcard-quote {
+  font-size: 14px; color: var(--ink);
+  line-height: 1.75; margin-bottom: 20px;
+  font-style: italic;
+}
+
+.tcard-author { display: flex; align-items: center; gap: 12px; }
+
+.tcard-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: var(--green);
+  flex-shrink: 0;
+}
+
+.tcard-name { font-size: 13px; font-weight: 600; color: var(--forest); }
+.tcard-role { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+/* ── FAQ ── */
+.faq { padding: 96px 48px; background: var(--forest); }
+
+.faq-inner { max-width: 800px; margin: 0 auto; }
+
+.faq-inner .section-kicker { color: var(--lime); }
+.faq-inner .section-title { color: #fff; }
+
+.faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 1px; }
+
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+
+.faq-q {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 20px 0;
+  cursor: pointer; font-size: 15px; font-weight: 500;
+  color: #fff; transition: color 0.2s;
+  list-style: none;
+}
+
+.faq-q:hover { color: var(--lime); }
+
+.faq-chevron {
+  width: 20px; height: 20px; flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: rgba(255,255,255,0.5);
+  transition: all 0.25s;
+}
+
+.faq-item.open .faq-chevron {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--forest);
+  transform: rotate(180deg);
+}
+
+.faq-item.open .faq-q { color: var(--lime); }
+
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  line-height: 1.75; font-weight: 300;
+  padding: 0;
+}
+
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding-bottom: 20px;
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--green);
+  padding: 80px 48px;
+  text-align: center;
+}
+
+.cta-band h2 {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; color: #fff;
+  letter-spacing: -1px; margin-bottom: 14px;
+}
+
+.cta-band h2 em { font-style: normal; color: var(--lime); }
+
+.cta-band p {
+  font-size: 16px; font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px; line-height: 1.6;
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+
+.cta-contacts {
+  display: flex; justify-content: center; gap: 32px;
+  flex-wrap: wrap; margin-top: 28px;
+}
+
+.cta-contact-item {
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,0.85); font-size: 14px;
+}
+
+.contact-dot {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #111a14;
+  padding: 48px 48px 32px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 32px;
+}
+
+.footer-logo {
+  font-size: 18px; font-weight: 700;
+  color: #fff; text-decoration: none; letter-spacing: -0.5px;
+  display: block; margin-bottom: 8px;
+}
+
+.footer-logo span {
+  background: var(--green); color: #fff;
+  padding: 1px 6px; border-radius: 5px; font-size: 16px;
+}
+
+footer p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; max-width: 260px; }
+
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+
+.footer-links a {
+  color: rgba(255,255,255,0.4); text-decoration: none;
+  font-size: 13px; transition: color 0.2s;
+}
+
+.footer-links a:hover { color: #fff; }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-inner { grid-template-columns: 1fr; padding: 48px 20px 60px; gap: 40px; }
+  .why { padding: 64px 20px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .how { padding: 64px 20px; }
+  .how-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .how-steps::before { display: none; }
+  .reqs { padding: 64px 20px; }
+  .reqs-inner { grid-template-columns: 1fr; gap: 40px; }
+  .testimonials { padding: 64px 20px; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .faq { padding: 64px 20px; }
+  .cta-band { padding: 64px 20px; }
+  footer { padding: 40px 20px 24px; flex-direction: column; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tag    { animation: fadeUp 0.4s ease both; }
+.hero h1     { animation: fadeUp 0.4s 0.08s ease both; }
+.hero-sub    { animation: fadeUp 0.4s 0.16s ease both; }
+.hero-actions { animation: fadeUp 0.4s 0.22s ease both; }
+.hero-stats  { animation: fadeUp 0.4s 0.28s ease both; }
+.hero-form-card { animation: fadeUp 0.5s 0.1s ease both; }
+
+/* Success state */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.success-icon {
+  width: 56px; height: 56px;
+  background: var(--light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin: 0 auto 16px;
+}
+
+.success-title { font-size: 18px; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
+.success-sub { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Thrill<span>CR</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Experiences</a></li>
+    <li><a href="/#zones">Zones</a></li>
+    <li><a href="/#how">How it works</a></li>
+    <li><a href="/partners" style="color:#fff;font-weight:500">For partners</a></li>
+    <li><a href="#apply" class="nav-cta">Apply now</a></li>
+  </ul>
+  <button class="lang-btn" onclick="toggleLang()" id="lang-btn">ES</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag" data-en="Adventure providers · Costa Rica" data-es="Proveedores de aventura · Costa Rica">Adventure providers · Costa Rica</div>
+      <h1 data-en="Reach thousands of travelers.<br>Keep running your <em>adventure.</em>" data-es="Llegá a miles de viajeros.<br>Seguí corriendo tu <em>aventura.</em>">Reach thousands of travelers.<br>Keep running your <em>adventure.</em></h1>
+      <p class="hero-sub" data-en="List your rafting, canopy, ATV, hiking, surf or any adventure experience on ThrillCR. We handle bookings, payments and marketing — you deliver the thrill." data-es="Listá tu experiencia de rafting, canopy, cuadraciclos, senderismo, surf o cualquier aventura en ThrillCR. Nosotros manejamos reservas, pagos y marketing — vos entregás la aventura.">List your rafting, canopy, ATV, hiking, surf or any adventure experience on ThrillCR. We handle bookings, payments and marketing — you deliver the thrill.</p>
+      <div class="hero-actions">
+        <a href="#apply" class="btn-lime" data-en="Apply to be a partner" data-es="Aplicar como proveedor">Apply to be a partner</a>
+        <a href="#how-it-works" class="btn-ghost" data-en="How it works" data-es="Cómo funciona">How it works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hstat-n">2.7M</div>
+          <div class="hstat-l" data-en="tourists/year" data-es="turistas/año">tourists/year</div>
+        </div>
+        <div>
+          <div class="hstat-n">$0</div>
+          <div class="hstat-l" data-en="upfront cost" data-es="costo inicial">upfront cost</div>
+        </div>
+        <div>
+          <div class="hstat-n">11</div>
+          <div class="hstat-l" data-en="active zones" data-es="zonas activas">active zones</div>
+        </div>
+        <div>
+          <div class="hstat-n">Weekly</div>
+          <div class="hstat-l" data-en="payouts" data-es="pagos">payouts</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLY FORM -->
+    <div class="hero-form-card" id="apply">
+      <div id="form-content">
+        <div class="form-title" data-en="Apply to list your experience" data-es="Aplicá para listar tu experiencia">Apply to list your experience</div>
+        <div class="form-sub" data-en="We'll reach out within 24 hours to get you set up." data-es="Te contactamos en menos de 24 horas para comenzar.">We'll reach out within 24 hours to get you set up.</div>
+
+        <div class="form-group">
+          <label class="form-label" data-en="Your name" data-es="Tu nombre">Your name</label>
+          <input type="text" class="form-input" id="f-name" placeholder="Carlos Mora">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-en="WhatsApp or phone" data-es="WhatsApp o teléfono">WhatsApp or phone</label>
+          <input type="tel" class="form-input" id="f-phone" placeholder="+506 XXXX-XXXX">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-en="Email" data-es="Correo electrónico">Email</label>
+          <input type="email" class="form-input" id="f-email" placeholder="carlos@aventura.cr">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label" data-en="Activity type" data-es="Tipo de actividad">Activity type</label>
+            <select class="form-select" id="f-activity">
+              <option value="" data-en="Select..." data-es="Seleccioná...">Select...</option>
+              <option data-en="Rafting / Kayak" data-es="Rafting / Kayak">Rafting / Kayak</option>
+              <option data-en="Canopy / Zipline" data-es="Canopy / Tirolesa">Canopy / Zipline</option>
+              <option data-en="ATVs / Off-road" data-es="Cuadraciclos">ATVs / Off-road</option>
+              <option data-en="Hiking / Trekking" data-es="Senderismo">Hiking / Trekking</option>
+              <option data-en="Surf / Bodyboard" data-es="Surf / Bodyboard">Surf / Bodyboard</option>
+              <option data-en="Wildlife tours" data-es="Tours de fauna">Wildlife tours</option>
+              <option data-en="Volcano tours" data-es="Tours de volcanes">Volcano tours</option>
+              <option data-en="Waterfall hikes" data-es="Caminatas a cascadas">Waterfall hikes</option>
+              <option data-en="Other" data-es="Otro">Other</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label" data-en="Your zone" data-es="Tu zona">Your zone</label>
+            <select class="form-select" id="f-zone">
+              <option value="">Select...</option>
+              <option>La Fortuna</option>
+              <option>Monteverde</option>
+              <option>Manuel Antonio</option>
+              <option>Jacó</option>
+              <option>Tamarindo</option>
+              <option>Puerto Viejo</option>
+              <option>Cahuita</option>
+              <option>Playa Sámara</option>
+              <option>Santa Teresa</option>
+              <option>Mal País</option>
+              <option>San José</option>
+              <option data-en="Other" data-es="Otro">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:16px">
+          <label class="form-label" data-en="Tell us about your experience (optional)" data-es="Contanos sobre tu experiencia (opcional)">Tell us about your experience (optional)</label>
+          <textarea class="form-textarea" id="f-desc" placeholder="Describe your activity, group sizes, pricing range..."></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()" data-en="Send my application →" data-es="Enviar mi aplicación →">Send my application →</button>
+        <div class="form-note" data-en="No commitment required. We'll follow up via WhatsApp within 24 hours." data-es="Sin compromiso. Te contactamos por WhatsApp en menos de 24 horas.">No commitment required. We'll follow up via WhatsApp within 24 hours.</div>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <div class="success-icon">✓</div>
+        <div class="success-title" data-en="Application received!" data-es="¡Aplicación recibida!">Application received!</div>
+        <div class="success-sub" data-en="We'll reach out via WhatsApp within 24 hours to get you started. Welcome to ThrillCR." data-es="Te contactamos por WhatsApp en menos de 24 horas. Bienvenido a ThrillCR.">We'll reach out via WhatsApp within 24 hours to get you started. Welcome to ThrillCR.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THRILLCR -->
+<section class="why">
+  <div class="section-header">
+    <div class="section-kicker" data-en="Why ThrillCR" data-es="Por qué ThrillCR">Why ThrillCR</div>
+    <h2 class="section-title" data-en="Everything you need.<br><span>Nothing you don't.</span>" data-es="Todo lo que necesitás.<br><span>Nada que no.</span>">Everything you need.<br><span>Nothing you don't.</span></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">💳</div>
+      <div class="why-title" data-en="$0 to get started" data-es="$0 para empezar">$0 to get started</div>
+      <div class="why-desc" data-en="No listing fees, no monthly subscription, no contracts. We only earn when you do. Your risk is zero." data-es="Sin cobros de listado, sin mensualidad, sin contratos. Solo ganamos cuando vos ganás. Tu riesgo es cero.">No listing fees, no monthly subscription, no contracts. We only earn when you do. Your risk is zero.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <div class="why-title" data-en="International reach" data-es="Alcance internacional">International reach</div>
+      <div class="why-desc" data-en="US, Canadian and European travelers search in English and pay with credit cards. We bridge that gap so they find you." data-es="Viajeros de EEUU, Canadá y Europa buscan en inglés y pagan con tarjeta. Nosotros hacemos el puente para que te encuentren.">US, Canadian and European travelers search in English and pay with credit cards. We bridge that gap so they find you.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📱</div>
+      <div class="why-title" data-en="Bookings while you sleep" data-es="Reservas mientras dormís">Bookings while you sleep</div>
+      <div class="why-desc" data-en="Guests book and pay 24/7 online. You get notified by WhatsApp instantly. No more missed calls or lost bookings." data-es="Los turistas reservan y pagan 24/7 en línea. Te notificamos por WhatsApp al instante. No más llamadas perdidas ni reservas que se van.">Guests book and pay 24/7 online. You get notified by WhatsApp instantly. No more missed calls or lost bookings.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📊</div>
+      <div class="why-title" data-en="Your own dashboard" data-es="Tu propio panel">Your own dashboard</div>
+      <div class="why-desc" data-en="Manage your schedule, pricing, availability and see all upcoming bookings in one clean interface. No tech skills needed." data-es="Manejá tu agenda, precios, disponibilidad y todas las reservas próximas en una interfaz simple. Sin conocimientos técnicos.">Manage your schedule, pricing, availability and see all upcoming bookings in one clean interface. No tech skills needed.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⭐</div>
+      <div class="why-title" data-en="Verified reviews build trust" data-es="Reseñas verificadas generan confianza">Verified reviews build trust</div>
+      <div class="why-desc" data-en="Only travelers who actually booked through ThrillCR can leave a review. Real credibility that converts future guests." data-es="Solo viajeros que reservaron a través de ThrillCR pueden dejar reseña. Credibilidad real que convierte futuros turistas.">Only travelers who actually booked through ThrillCR can leave a review. Real credibility that converts future guests.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📣</div>
+      <div class="why-title" data-en="Marketing included" data-es="Marketing incluido">Marketing included</div>
+      <div class="why-desc" data-en="SEO, Google Ads and social media campaigns targeting adventure travelers. We drive traffic — you focus on the experience." data-es="SEO, Google Ads y redes sociales dirigidas a viajeros de aventura. Nosotros traemos el tráfico — vos enfocate en la experiencia.">SEO, Google Ads and social media campaigns targeting adventure travelers. We drive traffic — you focus on the experience.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how-it-works">
+  <div class="how-inner">
+    <div class="section-kicker" data-en="Simple process" data-es="Proceso simple">Simple process</div>
+    <h2 class="section-title" data-en="Up and running in days, not months." data-es="Activo en días, no meses.">Up and running in days, not months.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-circle">1</div>
+        <div class="step-title" data-en="Apply" data-es="Aplicá">Apply</div>
+        <div class="step-desc" data-en="Fill out the form above. Tell us about your experience, zone and group sizes." data-es="Completá el formulario. Contanos sobre tu experiencia, zona y tamaño de grupos.">Fill out the form above. Tell us about your experience, zone and group sizes.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">2</div>
+        <div class="step-title" data-en="We review" data-es="Revisamos">We review</div>
+        <div class="step-desc" data-en="Our team reviews your application and reaches out via WhatsApp within 24 hours." data-es="Nuestro equipo revisa tu aplicación y te contacta por WhatsApp en menos de 24 horas.">Our team reviews your application and reaches out via WhatsApp within 24 hours.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">3</div>
+        <div class="step-title" data-en="We build your listing" data-es="Creamos tu listado">We build your listing</div>
+        <div class="step-desc" data-en="We create your listing page with photos, description, pricing and availability calendar." data-es="Creamos tu página con fotos, descripción, precios y calendario de disponibilidad.">We create your listing page with photos, description, pricing and availability calendar.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">4</div>
+        <div class="step-title" data-en="Start receiving bookings" data-es="Recibí reservas">Start receiving bookings</div>
+        <div class="step-desc" data-en="Go live. Guests find you, book online and pay. You get paid every Monday." data-es="Salís al aire. Los turistas te encuentran, reservan y pagan en línea. Vos cobrás cada lunes.">Go live. Guests find you, book online and pay. You get paid every Monday.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS + COMMISSION -->
+<section class="reqs">
+  <div class="reqs-inner">
+    <div class="reqs-left">
+      <div class="section-kicker" data-en="Partner requirements" data-es="Requisitos para proveedores">Partner requirements</div>
+      <h2 class="section-title" data-en="We keep the bar high.<br>So your reviews mean something." data-es="Mantenemos el estándar alto.<br>Para que tus reseñas valgan algo.">We keep the bar high.<br>So your reviews mean something.</h2>
+      <div class="reqs-list">
+        <div class="req-item">
+          <div class="req-check">✓</div>
+          <div class="req-text">
+            <div class="req-title" data-en="Legal operation in Costa Rica" data-es="Operación legal en Costa Rica">Legal operation in Costa Rica</div>
+            <div class="req-desc" data-en="Valid cédula jurídica or physical person registration." data-es="Cédula jurídica o registro como persona física válido.">Valid cédula jurídica or physical person registration.</div>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-check">✓</div>
+          <div class="req-text">
+            <div class="req-title" data-en="Liability insurance" data-es="Seguro de responsabilidad civil">Liability insurance</div>
+            <div class="req-desc" data-en="Minimum coverage for your activity type required before going live." data-es="Cobertura mínima requerida para tu tipo de actividad antes de publicar.">Minimum coverage for your activity type required before going live.</div>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-check">✓</div>
+          <div class="req-text">
+            <div class="req-title" data-en="Qualified guides" data-es="Guías calificados">Qualified guides</div>
+            <div class="req-desc" data-en="Certified or demonstrably experienced guides for your specific activity." data-es="Guías certificados o con experiencia demostrable en tu actividad específica.">Certified or demonstrably experienced guides for your specific activity.</div>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-check">✓</div>
+          <div class="req-text">
+            <div class="req-title" data-en="Quality photos" data-es="Fotos de calidad">Quality photos</div>
+            <div class="req-desc" data-en="At least 5 real photos of your experience. No stock photos." data-es="Al menos 5 fotos reales de tu experiencia. No se aceptan fotos de stock.">At least 5 real photos of your experience. No stock photos.</div>
+          </div>
+        </div>
+        <div class="req-item">
+          <div class="req-check">✓</div>
+          <div class="req-text">
+            <div class="req-title" data-en="Respond within 4 hours" data-es="Responder en menos de 4 horas">Respond within 4 hours</div>
+            <div class="req-desc" data-en="Confirm or decline booking requests within 4 hours of receiving them." data-es="Confirmar o rechazar solicitudes de reserva dentro de las 4 horas de recibirlas.">Confirm or decline booking requests within 4 hours of receiving them.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reqs-right">
+      <div class="commission-card">
+        <div class="commission-title" data-en="Commission model" data-es="Modelo de comisión">Commission model</div>
+        <div class="commission-sub" data-en="Agreed individually per provider and activity type." data-es="Acordado individualmente con cada proveedor y tipo de actividad.">Agreed individually per provider and activity type.</div>
+        <div class="commission-rows">
+          <div class="comm-row">
+            <span class="comm-label" data-en="Upfront listing fee" data-es="Cobro inicial por listado">Upfront listing fee</span>
+            <span class="comm-val">$0</span>
+          </div>
+          <div class="comm-row">
+            <span class="comm-label" data-en="Monthly subscription" data-es="Mensualidad">Monthly subscription</span>
+            <span class="comm-val">$0</span>
+          </div>
+          <div class="comm-row">
+            <span class="comm-label" data-en="Long-term contract" data-es="Contrato a largo plazo">Long-term contract</span>
+            <span class="comm-val">None</span>
+          </div>
+          <div class="comm-row">
+            <span class="comm-label" data-en="Commission" data-es="Comisión">Commission</span>
+            <span class="comm-val comm-val-white" data-en="Agreed per deal" data-es="Acordada por trato">Agreed per deal</span>
+          </div>
+          <div class="comm-row">
+            <span class="comm-label" data-en="Payout schedule" data-es="Frecuencia de pago">Payout schedule</span>
+            <span class="comm-val" data-en="Every Monday" data-es="Cada lunes">Every Monday</span>
+          </div>
+          <div class="comm-row">
+            <span class="comm-label" data-en="Payment method" data-es="Método de pago">Payment method</span>
+            <span class="comm-val comm-val-white" data-en="Bank transfer / SINPE" data-es="Transferencia / SINPE">Bank transfer / SINPE</span>
+          </div>
+        </div>
+        <a href="#apply" class="commission-cta" data-en="Apply to be a partner →" data-es="Aplicar como proveedor →">Apply to be a partner →</a>
+        <div class="payout-note" data-en="We only earn when you earn. No bookings = no charges." data-es="Solo ganamos cuando vos ganás. Sin reservas = sin cobros.">We only earn when you earn. No bookings = no charges.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-kicker" data-en="Partner stories" data-es="Historias de proveedores">Partner stories</div>
+    <h2 class="section-title" data-en="Providers who joined first." data-es="Proveedores que se unieron primero.">Providers who joined first.</h2>
+    <div class="testimonials-grid">
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote" data-en="&ldquo;Before ThrillCR, I was losing bookings every night. Now guests find us online, pay in advance, and I wake up with confirmed tours. It changed how I run my business.&rdquo;" data-es="&ldquo;Antes de ThrillCR, perdía reservas cada noche. Ahora los turistas nos encuentran en línea, pagan por adelantado, y me despierto con tours confirmados. Cambió cómo manejo mi negocio.&rdquo;">&ldquo;Before ThrillCR, I was losing bookings every night. Now guests find us online, pay in advance, and I wake up with confirmed tours. It changed how I run my business.&rdquo;</div>
+        <div class="tcard-author">
+          <div class="tcard-avatar">CM</div>
+          <div>
+            <div class="tcard-name">Carlos M.</div>
+            <div class="tcard-role" data-en="Rafting operator · Turrialba" data-es="Operador de rafting · Turrialba">Rafting operator · Turrialba</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote" data-en="&ldquo;The setup was incredibly fast. The ThrillCR team built our listing, took care of the description and had us live within days. Now 60% of our bookings come through the platform.&rdquo;" data-es="&ldquo;La configuración fue increíblemente rápida. El equipo de ThrillCR armó nuestro listado, se encargó de la descripción y nos activó en días. Ahora el 60% de nuestras reservas llegan por la plataforma.&rdquo;">&ldquo;The setup was incredibly fast. The ThrillCR team built our listing, took care of the description and had us live within days. Now 60% of our bookings come through the platform.&rdquo;</div>
+        <div class="tcard-author">
+          <div class="tcard-avatar">AL</div>
+          <div>
+            <div class="tcard-name">Andrea L.</div>
+            <div class="tcard-role" data-en="Canopy &amp; zipline · Monteverde" data-es="Canopy y tirolesa · Monteverde">Canopy &amp; zipline · Monteverde</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote" data-en="&ldquo;I was skeptical about the commission model but there's truly no upfront cost. The first week we went live we had 4 bookings from US travelers who paid online. Pura vida.&rdquo;" data-es="&ldquo;Era escéptico con el modelo de comisión pero realmente no hay costo inicial. La primera semana que salimos al aire tuvimos 4 reservas de turistas de EEUU que pagaron en línea. Pura vida.&rdquo;">&ldquo;I was skeptical about the commission model but there's truly no upfront cost. The first week we went live we had 4 bookings from US travelers who paid online. Pura vida.&rdquo;</div>
+        <div class="tcard-author">
+          <div class="tcard-avatar">RP</div>
+          <div>
+            <div class="tcard-name">Roberto P.</div>
+            <div class="tcard-role" data-en="ATV tours · La Fortuna" data-es="Tours en ATV · La Fortuna">ATV tours · La Fortuna</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div class="section-kicker" data-en="Common questions" data-es="Preguntas frecuentes">Common questions</div>
+    <h2 class="section-title" data-en="Everything providers ask us." data-es="Todo lo que los proveedores nos preguntan.">Everything providers ask us.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)" data-en="When and how do I get paid?" data-es="¿Cuándo y cómo me pagan?">
+          <span data-en="When and how do I get paid?" data-es="¿Cuándo y cómo me pagan?">When and how do I get paid?</span>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a" data-en="Every Monday we transfer your earnings from the previous week directly to your Costa Rican bank account or via SINPE Móvil. No delays, no minimums." data-es="Cada lunes transferimos tus ganancias de la semana anterior directamente a tu cuenta bancaria en Costa Rica o por SINPE Móvil. Sin retrasos, sin mínimos.">Every Monday we transfer your earnings from the previous week directly to your Costa Rican bank account or via SINPE Móvil. No delays, no minimums.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span data-en="What happens if a guest cancels?" data-es="¿Qué pasa si un turista cancela?">What happens if a guest cancels?</span>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a" data-en="You choose your own cancellation policy — flexible (full refund up to 24h before), moderate (50% refund up to 5 days before) or strict (no refund). We enforce it on your behalf." data-es="Vos elegís tu política de cancelación — flexible (reembolso total hasta 24h antes), moderada (50% hasta 5 días antes) o estricta (sin reembolso). La aplicamos en tu nombre.">You choose your own cancellation policy — flexible (full refund up to 24h before), moderate (50% refund up to 5 days before) or strict (no refund). We enforce it on your behalf.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span data-en="Can I control my availability and pricing?" data-es="¿Puedo controlar mi disponibilidad y precios?">Can I control my availability and pricing?</span>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a" data-en="100%. Through your provider dashboard you can block dates, adjust pricing for peak seasons, set group size limits and pause your listing anytime." data-es="Al 100%. Desde tu panel de proveedor podés bloquear fechas, ajustar precios por temporada alta, establecer límites de grupo y pausar tu listado cuando quieras.">100%. Through your provider dashboard you can block dates, adjust pricing for peak seasons, set group size limits and pause your listing anytime.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span data-en="I'm already on Viator or GetYourGuide. Can I join?" data-es="Ya estoy en Viator o GetYourGuide. ¿Puedo unirme?">I'm already on Viator or GetYourGuide. Can I join?</span>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a" data-en="Absolutely. No exclusivity required. ThrillCR is an additional channel to your existing platforms — and we specialize in the Costa Rica market, so you reach different travelers." data-es="Absolutamente. No hay exclusividad requerida. ThrillCR es un canal adicional a tus plataformas existentes — y nos especializamos en el mercado costarricense, por lo que llegás a turistas diferentes.">Absolutely. No exclusivity required. ThrillCR is an additional channel to your existing platforms — and we specialize in the Costa Rica market, so you reach different travelers.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span data-en="How long does setup take?" data-es="¿Cuánto tiempo tarda la configuración?">How long does setup take?</span>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a" data-en="Most providers go live within 3–5 business days after applying. We handle the listing page, description and photos — you just send us your content and we take it from there." data-es="La mayoría de proveedores salen al aire en 3–5 días hábiles después de aplicar. Nosotros nos encargamos de la página, descripción y fotos — vos solo nos mandás el contenido y nosotros lo hacemos.">Most providers go live within 3–5 business days after applying. We handle the listing page, description and photos — you just send us your content and we take it from there.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span data-en="What if I have a problem with a guest?" data-es="¿Qué pasa si tengo un problema con un turista?">What if I have a problem with a guest?</span>
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a" data-en="Our support team handles all guest disputes, complaints and refund requests. You focus on delivering the experience — we handle the rest." data-es="Nuestro equipo de soporte maneja todas las disputas, quejas y solicitudes de reembolso de turistas. Vos enfocate en entregar la experiencia — nosotros nos encargamos del resto.">Our support team handles all guest disputes, complaints and refund requests. You focus on delivering the experience — we handle the rest.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2 data-en="Ready to grow your<br><em>adventure business?</em>" data-es="¿Listo para hacer crecer<br><em>tu negocio de aventura?</em>">Ready to grow your<br><em>adventure business?</em></h2>
+  <p data-en="Apply today. No upfront cost, no contract, no risk. We'll reach out within 24 hours." data-es="Aplicá hoy. Sin costo inicial, sin contrato, sin riesgo. Te contactamos en menos de 24 horas.">Apply today. No upfront cost, no contract, no risk. We'll reach out within 24 hours.</p>
+  <a href="#apply" class="btn-lime" data-en="Apply to be a partner" data-es="Aplicar como proveedor">Apply to be a partner</a>
+  <div class="cta-contacts">
+    <div class="cta-contact-item">
+      <div class="contact-dot">US</div>
+      <span>+1 (786) 299-0675</span>
+    </div>
+    <div class="cta-contact-item">
+      <div class="contact-dot">CR</div>
+      <span>+506 7202-5116</span>
+    </div>
+    <div class="cta-contact-item">
+      <div class="contact-dot">@</div>
+      <span>partners@thrillcr.com</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="/" class="footer-logo">Thrill<span>CR</span></a>
+    <p data-en="The adventure marketplace of Costa Rica. Book verified experiences with trusted local providers." data-es="El marketplace de aventuras de Costa Rica.">&copy; 2025 ThrillCR · The adventure marketplace of Costa Rica.</p>
+  </div>
+  <div class="footer-links">
+    <a href="/" data-en="Experiences" data-es="Experiencias">Experiences</a>
+    <a href="/partners" data-en="For partners" data-es="Para proveedores">For partners</a>
+    <a href="#" data-en="Contact" data-es="Contacto">Contact</a>
+    <a href="#" data-en="Privacy" data-es="Privacidad">Privacy</a>
+  </div>
+</footer>
+
+<script>
+let lang = 'en';
+
+function toggleLang() {
+  lang = lang === 'en' ? 'es' : 'en';
+  document.getElementById('lang-btn').textContent = lang === 'en' ? 'ES' : 'EN';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const t = el.getAttribute('data-' + lang);
+    if (t) el.innerHTML = t;
+  });
+}
+
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+
+  if (!name || !phone || !email) {
+    alert(lang === 'en' ? 'Please fill in your name, phone and email.' : 'Por favor completá nombre, teléfono y email.');
+    return;
+  }
+
+  // In production: send to backend / Formspree / Make / etc.
+  // For now: redirect to WhatsApp with pre-filled message
+  const activity = document.getElementById('f-activity').value;
+  const zone = document.getElementById('f-zone').value;
+  const desc = document.getElementById('f-desc').value;
+
+  const msg = encodeURIComponent(
+    `Hi ThrillCR! I want to list my experience.\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nActivity: ${activity}\nZone: ${zone}\n${desc ? 'About: ' + desc : ''}`
+  );
+
+  // Show success state
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+
+  // Open WhatsApp after short delay
+  setTimeout(() => {
+    window.open(`https://wa.me/17862990675?text=${msg}`, '_blank');
+  }, 800);
+}
+</script>
+</body>
+</html>
