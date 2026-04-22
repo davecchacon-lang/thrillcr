@@ -233,7 +233,7 @@ body {
 
 .cat {
   display: flex; flex-direction: column; align-items: center; gap: 6px;
-  padding: 14px 20px 14px;
+  padding: 14px 20px;
   cursor: pointer; transition: opacity 0.15s;
   border-bottom: 2px solid transparent;
   white-space: nowrap; opacity: 0.5;
@@ -243,131 +243,93 @@ body {
 
 .cat.active, .cat:hover { opacity: 1; }
 .cat.active { border-bottom-color: #222; }
-
 .cat-icon { font-size: 20px; }
 .cat-name { font-size: 11px; font-weight: 500; color: #222; }
 
-/* Filter pills row */
 .filters-row {
   padding: 12px 56px;
   display: flex; gap: 8px; align-items: center;
   overflow-x: auto; scrollbar-width: none;
 }
-
 .filters-row::-webkit-scrollbar { display: none; }
 
 .filter-pill {
   display: flex; align-items: center; gap: 6px;
   padding: 8px 16px;
-  border: 1px solid #ddd;
-  border-radius: 100px;
+  border: 1px solid #ddd; border-radius: 100px;
   font-size: 13px; font-weight: 500; color: #222;
   background: #fff; cursor: pointer;
   white-space: nowrap; flex-shrink: 0;
-  transition: all 0.15s;
-  font-family: inherit;
-  position: relative;
+  transition: all 0.15s; font-family: inherit;
 }
-
 .filter-pill:hover { border-color: #222; }
 .filter-pill.active { background: #222; color: #fff; border-color: #222; }
-.filter-pill.active .pill-arrow { filter: invert(1); }
+.pill-arrow { font-size: 10px; opacity: 0.5; transition: transform 0.15s; }
+.filter-pill.active .pill-arrow { opacity: 1; filter: invert(1); }
 
-.pill-arrow { font-size: 10px; opacity: 0.5; }
-.pill-count {
-  background: #00875A; color: #fff;
-  font-size: 10px; font-weight: 700;
-  padding: 1px 5px; border-radius: 100px;
-  min-width: 18px; text-align: center;
-}
-
-.filter-divider {
-  width: 1px; height: 20px;
-  background: #ddd; flex-shrink: 0; margin: 0 4px;
-}
+.filter-divider { width: 1px; height: 20px; background: #ddd; flex-shrink: 0; margin: 0 4px; }
 
 .clear-btn {
   font-size: 13px; color: #717171;
-  background: none; border: none;
-  cursor: pointer; font-family: inherit;
-  text-decoration: underline; text-underline-offset: 2px;
-  white-space: nowrap; flex-shrink: 0;
-  display: none;
-  padding: 8px 4px;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; text-decoration: underline;
+  text-underline-offset: 2px; white-space: nowrap;
+  flex-shrink: 0; display: none; padding: 8px 4px;
 }
-
 .clear-btn.visible { display: block; }
 
-/* Dropdown panels */
+/* Dropdown — rendered in body, positioned via JS */
 .dropdown {
-  position: absolute; top: calc(100% + 8px); left: 0;
+  position: fixed;
   background: #fff; border: 1px solid #ddd;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 20px; min-width: 280px; z-index: 500;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  padding: 20px; min-width: 300px;
+  z-index: 9999;
   display: none;
+  animation: ddIn 0.15s ease;
 }
-
+@keyframes ddIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .dropdown.open { display: block; }
 
 .dd-title {
-  font-size: 12px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.8px;
-  color: #717171; margin-bottom: 12px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: #717171; margin-bottom: 14px;
 }
-
-.dd-options {
-  display: flex; flex-wrap: wrap; gap: 8px;
-}
-
+.dd-options { display: flex; flex-wrap: wrap; gap: 8px; }
 .dd-opt {
-  padding: 7px 14px;
+  padding: 8px 16px;
   border: 1px solid #ddd; border-radius: 100px;
-  font-size: 13px; font-weight: 400; color: #222;
-  cursor: pointer; transition: all 0.15s;
-  background: #fff; font-family: inherit;
+  font-size: 13px; color: #222; cursor: pointer;
+  transition: all 0.15s; background: #fff; font-family: inherit;
 }
-
-.dd-opt:hover { border-color: #222; }
+.dd-opt:hover { border-color: #222; background: #f5f5f5; }
 .dd-opt.sel { background: #222; color: #fff; border-color: #222; }
 
-.dd-range {
-  display: flex; flex-direction: column; gap: 12px;
-}
-
-.range-row {
-  display: flex; align-items: center; gap: 12px;
-}
-
-.range-label { font-size: 13px; color: #717171; min-width: 32px; }
-
-input[type=range] {
-  flex: 1; accent-color: #00875A;
-}
-
-.range-val {
-  font-size: 14px; font-weight: 600; color: #222;
-  min-width: 60px; text-align: right;
-}
+.dd-range { display: flex; flex-direction: column; gap: 14px; }
+.range-row { display: flex; align-items: center; gap: 12px; }
+.range-label { font-size: 13px; color: #717171; min-width: 20px; }
+input[type=range] { flex: 1; accent-color: #00875A; }
+.range-val { font-size: 15px; font-weight: 600; color: #222; min-width: 56px; text-align: right; }
 
 .dd-apply {
   margin-top: 16px; width: 100%;
-  background: #222; color: #fff;
-  border: none; border-radius: 8px;
-  padding: 10px; font-size: 14px; font-weight: 600;
-  cursor: pointer; font-family: inherit;
-  transition: background 0.15s;
+  background: #222; color: #fff; border: none;
+  border-radius: 10px; padding: 11px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: background 0.15s;
 }
-
 .dd-apply:hover { background: #00875A; }
 
-/* Result count */
 .result-bar {
-  padding: 0 56px 16px;
+  padding: 0 56px 14px;
   font-size: 13px; color: #717171;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 6px;
 }
-
 .result-count { font-weight: 600; color: #222; }
 
 /* ── SECTION ── */
@@ -629,18 +591,18 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
 <nav class="nav">
   <a href="/" class="nav-logo">Thrill<span>CR</span></a>
 
-  <div class="nav-center">
+  <div class="nav-center" onclick="scrollToExperiences()">
     <div class="nav-search-field">
-      <span class="nav-search-label" data-en="Where" data-es="Dónde">Where</span>
-      <span class="nav-search-val" data-en="Costa Rica" data-es="Costa Rica">Costa Rica</span>
+      <span class="nav-search-label" data-en="Destination" data-es="Destino">Destination</span>
+      <span class="nav-search-val" id="nav-dest" data-en="Anywhere in CR" data-es="Cualquier destino">Anywhere in CR</span>
     </div>
     <div class="nav-search-field">
       <span class="nav-search-label" data-en="Category" data-es="Categoría">Category</span>
-      <span class="nav-search-val" data-en="Any experience" data-es="Cualquier experiencia">Any experience</span>
+      <span class="nav-search-val" id="nav-cat" data-en="Any experience" data-es="Cualquier experiencia">Any experience</span>
     </div>
     <div class="nav-search-field" style="border-right:none">
       <span class="nav-search-label" data-en="Budget" data-es="Presupuesto">Budget</span>
-      <span class="nav-search-val" data-en="Any price" data-es="Cualquier precio">Any price</span>
+      <span class="nav-search-val" id="nav-budget" data-en="Any price" data-es="Cualquier precio">Any price</span>
     </div>
     <button class="nav-search-btn" aria-label="Search">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -650,7 +612,7 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
   </div>
 
   <div class="nav-right">
-    <a href="/partners" class="nav-link" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
+    <a href="#providers" class="nav-link" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn">ES</button>
   </div>
 </nav>
@@ -728,6 +690,34 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
       <span class="cat-icon">💧</span>
       <span class="cat-name" data-en="Waterfalls" data-es="Cascadas">Waterfalls</span>
     </a>
+    <a href="#" class="cat" onclick="setcat(this,'bike')">
+      <span class="cat-icon">🚴</span>
+      <span class="cat-name" data-en="Biking" data-es="Ciclismo">Biking</span>
+    </a>
+    <a href="#" class="cat" onclick="setcat(this,'horseback')">
+      <span class="cat-icon">🐴</span>
+      <span class="cat-name" data-en="Horseback" data-es="Cabalgata">Horseback</span>
+    </a>
+    <a href="#" class="cat" onclick="setcat(this,'diving')">
+      <span class="cat-icon">🤿</span>
+      <span class="cat-name" data-en="Diving" data-es="Buceo">Diving</span>
+    </a>
+    <a href="#" class="cat" onclick="setcat(this,'fishing')">
+      <span class="cat-icon">🎣</span>
+      <span class="cat-name" data-en="Fishing" data-es="Pesca">Fishing</span>
+    </a>
+    <a href="#" class="cat" onclick="setcat(this,'transport')">
+      <span class="cat-icon">🚐</span>
+      <span class="cat-name" data-en="Transport" data-es="Transporte">Transport</span>
+    </a>
+    <a href="#" class="cat" onclick="setcat(this,'cultural')">
+      <span class="cat-icon">🏛️</span>
+      <span class="cat-name" data-en="Cultural" data-es="Cultural">Cultural</span>
+    </a>
+    <a href="#" class="cat" onclick="setcat(this,'other')">
+      <span class="cat-icon">✨</span>
+      <span class="cat-name" data-en="More" data-es="Más">More</span>
+    </a>
   </div>
 
   <!-- Filter pills row -->
@@ -735,18 +725,26 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
 
     <!-- Pickup -->
     <div style="position:relative">
-      <button class="filter-pill" id="pill-pickup" onclick="toggleDD('pickup')">
-        <span data-en="Pickup" data-es="Recogida">Pickup</span>
+      <button class="filter-pill" id="pill-destination" onclick="toggleDD('destination')">
+        <span data-en="Destination" data-es="Destino">Destination</span>
         <span class="pill-arrow">▼</span>
       </button>
-      <div class="dropdown" id="dd-pickup">
-        <div class="dd-title" data-en="PICKUP OPTIONS" data-es="OPCIONES DE RECOGIDA">PICKUP OPTIONS</div>
+      <div class="dropdown" id="dd-destination">
+        <div class="dd-title" data-en="DESTINATION" data-es="DESTINO">DESTINATION</div>
         <div class="dd-options">
-          <button class="dd-opt" onclick="selectOpt(this,'pickup')" data-en="Hotel pickup" data-es="Recogida en hotel">Hotel pickup</button>
-          <button class="dd-opt" onclick="selectOpt(this,'pickup')" data-en="Meeting point" data-es="Punto de encuentro">Meeting point</button>
-          <button class="dd-opt" onclick="selectOpt(this,'pickup')" data-en="Both available" data-es="Ambas opciones">Both available</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">La Fortuna</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Monteverde</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Manuel Antonio</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Jacó</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Tamarindo</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Puerto Viejo</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Cahuita</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Playa Sámara</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Santa Teresa</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">Mal País</button>
+          <button class="dd-opt" onclick="selectOpt(this,'destination')">San José</button>
         </div>
-        <button class="dd-apply" onclick="applyFilter('pickup')" data-en="Apply" data-es="Aplicar">Apply</button>
+        <button class="dd-apply" onclick="applyFilter('destination')" data-en="Apply" data-es="Aplicar">Apply</button>
       </div>
     </div>
 
@@ -1112,7 +1110,7 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
     <h2 data-en="Are you an adventure provider in Costa Rica?" data-es="¿Sos un proveedor de aventuras en Costa Rica?">Are you an adventure provider in Costa Rica?</h2>
     <p data-en="List your experience on ThrillCR and reach thousands of travelers looking for exactly what you offer. No upfront cost — we only earn when you do." data-es="Listá tu experiencia en ThrillCR y llegá a miles de viajeros que buscan exactamente lo que ofrecés. Sin costo inicial — solo ganamos cuando vos ganás.">List your experience on ThrillCR and reach thousands of travelers looking for exactly what you offer. No upfront cost — we only earn when you do.</p>
   </div>
-  <a href="/partners" class="btn-dark" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
+  <a href="#" class="btn-dark" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
 </div>
 
 <!-- FOOTER -->
@@ -1123,7 +1121,7 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
   </div>
   <div class="footer-links">
     <a href="#" data-en="About" data-es="Nosotros">About</a>
-    <a href="/partners" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
+    <a href="#providers" data-en="List your experience" data-es="Listá tu experiencia">List your experience</a>
     <a href="#" data-en="Contact" data-es="Contacto">Contact</a>
     <a href="#" data-en="Privacy" data-es="Privacidad">Privacy</a>
   </div>
@@ -1131,7 +1129,8 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
 
 <script>
   let lang = 'en';
-  const activeFilters = { pickup: null, duration: null, price: null, effort: null, group: null, rating: null, cat: 'all' };
+  const activeFilters = { destination: null, duration: null, price: null, effort: null, group: null, rating: null, cat: 'all' };
+  let openDD = null;
 
   function toggleLang() {
     lang = lang === 'en' ? 'es' : 'en';
@@ -1152,14 +1151,51 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
 
   function toggleDD(id) {
     event.stopPropagation();
+    const btn = document.getElementById('pill-' + id) || event.currentTarget;
     const dd = document.getElementById('dd-' + id);
-    const isOpen = dd.classList.contains('open');
-    document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
-    if (!isOpen) dd.classList.add('open');
+    if (!dd) return;
+
+    if (openDD && openDD !== id) {
+      const prev = document.getElementById('dd-' + openDD);
+      if (prev) prev.classList.remove('open');
+    }
+
+    if (dd.classList.contains('open')) {
+      dd.classList.remove('open');
+      openDD = null;
+      return;
+    }
+
+    // Position dropdown relative to button using fixed coords
+    const pill = document.getElementById('pill-' + id);
+    if (pill) {
+      const rect = pill.getBoundingClientRect();
+      dd.style.top = (rect.bottom + 8) + 'px';
+      // Clamp to viewport width
+      let left = rect.left;
+      const ddWidth = 300;
+      if (left + ddWidth > window.innerWidth - 16) {
+        left = window.innerWidth - ddWidth - 16;
+      }
+      dd.style.left = left + 'px';
+    }
+
+    dd.classList.add('open');
+    openDD = id;
   }
 
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown') && !e.target.closest('.filter-pill')) {
+      document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      openDD = null;
+    }
+  });
+
+  // Move all dropdowns to body so they're never clipped
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.dropdown').forEach(dd => {
+      document.body.appendChild(dd);
+    });
   });
 
   function selectOpt(el, filter) {
@@ -1185,8 +1221,10 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
   function applyFilter(id) {
     const pill = document.getElementById('pill-' + id);
     const hasVal = activeFilters[id] !== null;
-    pill.classList.toggle('active', hasVal);
-    document.getElementById('dd-' + id).classList.remove('open');
+    if (pill) pill.classList.toggle('active', hasVal);
+    const dd = document.getElementById('dd-' + id);
+    if (dd) dd.classList.remove('open');
+    openDD = null;
     applyAllFilters();
     updateClearBtn();
   }
@@ -1202,22 +1240,21 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
       if (activeFilters.price && parseInt(card.dataset.price) > activeFilters.price) show = false;
       if (activeFilters.duration && card.dataset.duration !== durationKey(activeFilters.duration)) show = false;
       if (activeFilters.effort && card.dataset.effort !== effortKey(activeFilters.effort)) show = false;
-      if (activeFilters.pickup && !pickupMatch(card.dataset.pickup, activeFilters.pickup)) show = false;
+      if (activeFilters.destination && card.dataset.destination !== activeFilters.destination) show = false;
       if (activeFilters.group && !groupMatch(card.dataset.group, activeFilters.group)) show = false;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
     const rb = document.getElementById('result-bar');
     const rc = document.getElementById('result-count');
-    const hasActive = Object.entries(activeFilters).some(([k,v]) => k !== 'cat' ? v !== null : v !== 'all');
-    rb.style.display = hasActive ? 'flex' : 'none';
-    rc.textContent = visible;
+    const hasActive = Object.entries(activeFilters).some(([k,v]) => k === 'cat' ? v !== 'all' : v !== null);
+    if (rb) { rb.style.display = hasActive ? 'flex' : 'none'; if(rc) rc.textContent = visible; }
   }
 
   function durationKey(val) {
     if (!val) return null;
     const v = val.toLowerCase();
-    if (v.includes('2 hrs') || v.includes('2hrs')) return 'short';
+    if (v.includes('under 2') || v.includes('2 hrs')) return 'short';
     if (v.includes('2–4') || v.includes('2-4')) return 'half';
     if (v.includes('half')) return 'half';
     if (v.includes('full')) return 'full';
@@ -1235,26 +1272,17 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
     return null;
   }
 
-  function pickupMatch(cardVal, filterVal) {
-    if (!filterVal) return true;
-    const fv = filterVal.toLowerCase();
-    if (fv.includes('hotel')) return cardVal === 'hotel' || cardVal === 'both';
-    if (fv.includes('meeting')) return cardVal === 'meeting' || cardVal === 'both';
-    if (fv.includes('both')) return true;
-    return true;
-  }
-
   function groupMatch(cardVal, filterVal) {
     if (!filterVal) return true;
     const fv = filterVal.toLowerCase();
-    if (fv.includes('solo') || fv.includes('couple')) return true;
     if (fv.includes('private')) return cardVal === 'private';
     return true;
   }
 
   function updateClearBtn() {
-    const hasActive = Object.entries(activeFilters).some(([k,v]) => k !== 'cat' ? v !== null : v !== 'all');
-    document.getElementById('clear-btn').classList.toggle('visible', hasActive);
+    const hasActive = Object.entries(activeFilters).some(([k,v]) => k === 'cat' ? v !== 'all' : v !== null);
+    const btn = document.getElementById('clear-btn');
+    if (btn) btn.classList.toggle('visible', hasActive);
   }
 
   function clearAllFilters() {
@@ -1262,12 +1290,31 @@ footer p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 260px; 
     document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.dd-opt').forEach(o => o.classList.remove('sel'));
     document.querySelectorAll('.cat').forEach(c => c.classList.remove('active'));
-    document.querySelector('.cat:first-child').classList.add('active');
-    document.getElementById('price-range').value = 300;
-    document.getElementById('price-val').textContent = 'Any';
+    const firstCat = document.querySelector('.cat');
+    if (firstCat) firstCat.classList.add('active');
+    const pr = document.getElementById('price-range');
+    if (pr) pr.value = 300;
+    const pv = document.getElementById('price-val');
+    if (pv) pv.textContent = 'Any';
     document.querySelectorAll('.card').forEach(c => c.style.display = '');
-    document.getElementById('result-bar').style.display = 'none';
-    document.getElementById('clear-btn').classList.remove('visible');
+    const rb = document.getElementById('result-bar');
+    if (rb) rb.style.display = 'none';
+    const cb = document.getElementById('clear-btn');
+    if (cb) cb.classList.remove('visible');
+  }
+
+  function scrollToExperiences() {
+    document.getElementById('experiences').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Keep nav search bar in sync with active filters
+  function syncNavBar() {
+    const dest = document.getElementById('nav-dest');
+    const cat = document.getElementById('nav-cat');
+    const budget = document.getElementById('nav-budget');
+    if (dest) dest.textContent = activeFilters.destination || (lang === 'es' ? 'Cualquier destino' : 'Anywhere in CR');
+    if (cat) cat.textContent = activeFilters.cat !== 'all' ? activeFilters.cat : (lang === 'es' ? 'Cualquier experiencia' : 'Any experience');
+    if (budget) budget.textContent = activeFilters.price ? '$' + activeFilters.price + ' max' : (lang === 'es' ? 'Cualquier precio' : 'Any price');
   }
 </script>
 </body>
