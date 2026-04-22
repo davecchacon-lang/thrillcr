@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /onboarding/
+
+Sitemap: https://thrillcr.com/sitemap.xml
