@@ -3,17 +3,15 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://thrillcr.com/</loc>
-    <lastmod>2025-04-22</lastmod>
+    <loc>https://www.thrillcr.com/</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thrillcr.com/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://thrillcr.com/"/>
   </url>
 
   <url>
-    <loc>https://thrillcr.com/partners</loc>
-    <lastmod>2025-04-22</lastmod>
+    <loc>https://www.thrillcr.com/partners</loc>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
