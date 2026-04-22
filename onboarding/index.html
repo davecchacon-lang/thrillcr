@@ -3,890 +3,862 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ThrillCR — Provider Onboarding Form</title>
+<title>ThrillCR — Partner Onboarding</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #F5EFE6;
+  background: #F0F4F0;
   color: #111;
-  padding: 40px 20px;
   -webkit-font-smoothing: antialiased;
 }
 
-.wrapper {
-  max-width: 680px;
-  margin: 0 auto;
+:root {
+  --forest: #1A3A2A;
+  --green:  #00875A;
+  --lime:   #7AB648;
+  --sand:   #F5EFE6;
+  --white:  #ffffff;
+  --muted:  #6B7569;
+  --light:  #F0F4F0;
+  --border: #DDE8DD;
+  --red:    #e05e1e;
 }
 
-/* Header */
+/* ── HEADER ── */
 .header {
-  background: #1A3A2A;
-  border-radius: 16px 16px 0 0;
-  padding: 32px 40px;
-  text-align: center;
+  background: var(--forest);
+  padding: 28px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
 }
 
-.logo {
-  font-size: 22px; font-weight: 700; color: #fff;
-  letter-spacing: -0.5px; margin-bottom: 10px;
+.logo { font-size: 20px; font-weight: 700; color: #fff; text-decoration: none; }
+.logo span { background: var(--green); padding: 2px 8px; border-radius: 6px; margin-left: 2px; }
+
+.header-title { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 300; }
+
+/* ── LAYOUT ── */
+.page { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.logo span {
-  background: #00875A; padding: 2px 8px;
-  border-radius: 6px; margin-left: 2px; font-size: 20px;
+.card-title {
+  font-size: 16px; font-weight: 700; color: var(--forest);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 22px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
 }
 
-.header-title {
-  font-size: 24px; font-weight: 700; color: #fff;
-  margin-bottom: 6px; letter-spacing: -0.5px;
-}
-
-.header-sub {
-  font-size: 14px; color: rgba(255,255,255,0.6);
-  font-weight: 300; line-height: 1.5;
-}
-
-/* Body */
-.body {
-  background: #fff;
-  padding: 40px;
-  border-left: 1px solid #e8e8e8;
-  border-right: 1px solid #e8e8e8;
-}
-
-.section {
-  margin-bottom: 36px;
-  padding-bottom: 36px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.section:last-child { border-bottom: none; margin-bottom: 0; }
-
-.section-num {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px;
-  background: #00875A; border-radius: 50%;
+.card-num {
+  width: 26px; height: 26px; flex-shrink: 0;
+  background: var(--green); border-radius: 50%;
   font-size: 12px; font-weight: 700; color: #fff;
-  margin-right: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
 
-.section-title {
-  font-size: 16px; font-weight: 700; color: #1A3A2A;
-  display: flex; align-items: center;
-  margin-bottom: 18px;
-}
-
-.field { margin-bottom: 16px; }
-
-.label {
-  display: block; font-size: 12px; font-weight: 600;
-  color: #1A3A2A; margin-bottom: 6px; letter-spacing: 0.3px;
-}
-
-.label span {
-  font-weight: 400; color: #999; font-size: 11px;
-}
-
-.input-box {
-  width: 100%; padding: 11px 14px;
-  border: 1.5px solid #ddd; border-radius: 10px;
-  font-size: 14px; font-family: inherit;
-  background: #fafafa; color: #111;
-  outline: none; transition: border-color 0.2s;
-}
-
-.input-box:focus { border-color: #00875A; background: #fff; }
-
-.textarea-box {
-  width: 100%; padding: 11px 14px;
-  border: 1.5px solid #ddd; border-radius: 10px;
-  font-size: 14px; font-family: inherit;
-  background: #fafafa; color: #111;
-  min-height: 90px; resize: vertical;
-  outline: none; transition: border-color 0.2s;
-  line-height: 1.5;
-}
-
-.textarea-box:focus { border-color: #00875A; background: #fff; }
-
+/* ── FORM ELEMENTS ── */
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
 
-/* Choice grids */
-.choice-grid {
-  display: grid;
-  gap: 8px;
+.field { margin-bottom: 14px; }
+.field:last-child { margin-bottom: 0; }
+
+label {
+  display: block; font-size: 11px; font-weight: 700;
+  color: var(--forest); margin-bottom: 5px;
+  letter-spacing: 0.4px; text-transform: uppercase;
 }
 
-.choice-grid-2 { grid-template-columns: 1fr 1fr; }
-.choice-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-.choice-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+label .opt { font-weight: 400; color: #aaa; text-transform: none; font-size: 10px; }
 
-.choice {
+input[type=text], input[type=email], input[type=tel],
+input[type=number], input[type=url], select, textarea {
+  width: 100%; padding: 10px 13px;
+  border: 1.5px solid #dde;
+  border-radius: 8px; font-size: 14px;
+  font-family: inherit; color: #111;
+  background: #fafafa; outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--green); background: #fff;
+}
+
+textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
+
+.req { color: var(--red); }
+
+/* ── CHIPS (activity selector) ── */
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+
+.chip input { display: none; }
+
+.chip label {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px;
+  border: 1.5px solid #dde;
+  border-radius: 100px;
+  font-size: 12px; font-weight: 500;
+  color: #555; cursor: pointer;
+  transition: all 0.15s;
+  text-transform: none; letter-spacing: 0;
+  background: #fafafa;
+  white-space: nowrap;
+}
+
+.chip input:checked + label {
+  background: #EBF5EE;
+  border-color: var(--green);
+  color: var(--forest);
+}
+
+/* ── RADIO PILLS ── */
+.radio-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+
+.rpill input { display: none; }
+
+.rpill label {
+  display: inline-block;
+  padding: 7px 14px;
+  border: 1.5px solid #dde;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 400;
+  color: #555; cursor: pointer;
+  transition: all 0.15s;
+  text-transform: none; letter-spacing: 0;
+  background: #fafafa;
+}
+
+.rpill input:checked + label {
+  background: #EBF5EE;
+  border-color: var(--green);
+  color: var(--forest);
+  font-weight: 600;
+}
+
+/* ── DAY PILLS ── */
+.day-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+
+.dpill input { display: none; }
+
+.dpill label {
+  width: 40px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid #dde; border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  color: #777; cursor: pointer;
+  transition: all 0.15s;
+  text-transform: none; letter-spacing: 0;
+  background: #fafafa;
+}
+
+.dpill input:checked + label {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: #fff;
+}
+
+/* ── EXPERIENCE BLOCK ── */
+.exp-block {
+  background: #FAFCFA;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
   position: relative;
 }
 
-.choice input[type="checkbox"],
-.choice input[type="radio"] {
-  position: absolute; opacity: 0; width: 0; height: 0;
+.exp-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
 }
 
-.choice label {
-  display: block; padding: 10px 12px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px; cursor: pointer;
-  font-size: 13px; color: #444;
-  transition: all 0.15s; text-align: center;
-  background: #fafafa;
-  font-weight: 400;
+.exp-num {
+  font-size: 13px; font-weight: 700; color: var(--forest);
+  display: flex; align-items: center; gap: 8px;
 }
 
-.choice label .icon { display: block; font-size: 18px; margin-bottom: 4px; }
-.choice label .name { font-weight: 600; color: #1A3A2A; font-size: 12px; }
-.choice label .desc { font-size: 10px; color: #999; margin-top: 2px; }
-
-.choice input:checked + label {
-  background: #F0F8F4;
-  border-color: #00875A;
-  color: #1A3A2A;
+.exp-badge {
+  width: 24px; height: 24px;
+  background: var(--lime);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--forest);
 }
 
-.choice input:checked + label .name { color: #00875A; }
-
-.hint {
-  font-size: 11px; color: #999; margin-top: 6px;
-  line-height: 1.5; font-style: italic;
+.exp-name-display {
+  font-size: 13px; color: var(--muted); font-weight: 300;
+  font-style: italic;
 }
 
-/* Photos section */
-.photo-requirements {
-  background: #F0F8F4;
-  border: 1px solid #C8E6D4;
+.btn-remove {
+  background: none; border: 1px solid #fcc;
+  color: #c44; border-radius: 6px;
+  font-size: 12px; font-weight: 500;
+  padding: 5px 12px; cursor: pointer;
+  font-family: inherit; transition: all 0.15s;
+}
+
+.btn-remove:hover { background: #fff0f0; }
+
+/* ── BUTTONS ── */
+.btn-add {
+  width: 100%; padding: 14px;
+  background: none;
+  border: 2px dashed var(--border);
   border-radius: 10px;
-  padding: 16px 18px;
-  margin-bottom: 16px;
+  font-size: 14px; font-weight: 600;
+  color: var(--green); cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-bottom: 20px;
 }
 
-.photo-req-title {
-  font-size: 13px; font-weight: 600; color: #1A3A2A; margin-bottom: 8px;
-}
+.btn-add:hover { border-color: var(--green); background: #EBF5EE; }
 
-.photo-req-list { list-style: none; }
-
-.photo-req-list li {
-  font-size: 12px; color: #4a7a5a;
-  padding: 3px 0; display: flex; align-items: flex-start; gap: 8px;
-}
-
-.photo-req-list li::before {
-  content: '✓'; color: #00875A; font-weight: 700; flex-shrink: 0;
-}
-
-/* Days grid */
-.days-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
-}
-
-/* Pricing table */
-.price-note {
-  background: #fff8ec;
-  border: 1px solid #fde7a0;
-  border-radius: 8px;
-  padding: 12px 14px;
-  font-size: 12px; color: #7a5a00;
-  margin-bottom: 14px;
-  line-height: 1.5;
-}
-
-/* Footer */
-.footer {
-  background: #1A3A2A;
-  border-radius: 0 0 16px 16px;
-  padding: 28px 40px;
+.submit-section {
+  background: var(--forest);
+  border-radius: 14px;
+  padding: 32px;
   text-align: center;
 }
 
-.submit-btn {
-  background: #7AB648; color: #1A3A2A;
+.submit-title {
+  font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px;
+}
+
+.submit-sub {
+  font-size: 13px; color: rgba(255,255,255,0.55);
+  margin-bottom: 24px; line-height: 1.5;
+}
+
+.submit-btns {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+}
+
+.btn-wa {
+  background: #25D366; color: #fff;
   border: none; border-radius: 100px;
-  padding: 14px 40px;
-  font-size: 15px; font-weight: 700;
+  padding: 13px 28px;
+  font-size: 15px; font-weight: 600;
   font-family: inherit; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
   transition: opacity 0.2s;
-  margin-bottom: 12px;
-  display: inline-block;
 }
 
-.submit-btn:hover { opacity: 0.9; }
+.btn-wa:hover { opacity: 0.9; }
 
-.footer-note {
-  font-size: 12px; color: rgba(255,255,255,0.45);
-  line-height: 1.5;
+.btn-email {
+  background: rgba(255,255,255,0.12); color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.25); border-radius: 100px;
+  padding: 13px 28px;
+  font-size: 15px; font-weight: 500;
+  font-family: inherit; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: all 0.2s;
 }
 
-.footer-contact {
-  font-size: 13px; color: rgba(255,255,255,0.7);
-  margin-top: 8px;
+.btn-email:hover { background: rgba(255,255,255,0.2); }
+
+.submit-note {
+  font-size: 11px; color: rgba(255,255,255,0.35);
+  margin-top: 16px; line-height: 1.5;
 }
 
-/* Print / send styling */
-@media print {
-  body { background: #fff; padding: 0; }
-  .wrapper { max-width: 100%; }
-  .choice label { page-break-inside: avoid; }
+/* ── PROGRESS BAR ── */
+.progress-bar {
+  background: rgba(255,255,255,0.1);
+  border-radius: 100px;
+  height: 4px;
+  margin-bottom: 28px;
+  overflow: hidden;
 }
 
-.required { color: #e05e1e; }
+.progress-fill {
+  height: 100%;
+  background: var(--lime);
+  border-radius: 100px;
+  transition: width 0.3s;
+  width: 20%;
+}
+
+/* ── HINT ── */
+.hint {
+  font-size: 11px; color: #aaa;
+  margin-top: 5px; line-height: 1.5;
+  font-style: italic;
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--green); margin: 22px 0 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 600px) {
+  .header { padding: 18px 20px; }
+  .card { padding: 20px; }
+  .row { grid-template-columns: 1fr; }
+  .row-3 { grid-template-columns: 1fr; }
+  .exp-block { padding: 18px; }
+  .submit-btns { flex-direction: column; }
+  .btn-wa, .btn-email { justify-content: center; }
+}
+
+/* ── SUCCESS ── */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.success-icon {
+  width: 64px; height: 64px;
+  background: var(--lime);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 20px;
+}
+
+.success-title { font-size: 24px; font-weight: 700; color: var(--forest); margin-bottom: 10px; }
+.success-sub { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 400px; margin: 0 auto; }
 </style>
 </head>
 <body>
-<div class="wrapper">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo">Thrill<span>CR</span></div>
-    <div class="header-title">Provider Onboarding Form</div>
-    <div class="header-sub">Complete this form so we can build your listing page.<br>It takes about 10 minutes — we handle everything from here.</div>
+<div class="header">
+  <a href="/" class="logo">Thrill<span>CR</span></a>
+  <div class="header-title">Partner Onboarding · Confidential</div>
+</div>
+
+<div class="page" id="main-page">
+
+  <!-- SECTION 1: PROVIDER INFO -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-num">1</span>
+      Your information
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Full name <span class="req">*</span></label>
+        <input type="text" id="p-name" placeholder="Carlos Mora">
+      </div>
+      <div class="field">
+        <label>Business name <span class="opt">(if different)</span></label>
+        <input type="text" id="p-biz" placeholder="Aventuras Pacuare S.A.">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>WhatsApp <span class="req">*</span></label>
+        <input type="tel" id="p-phone" placeholder="+506 XXXX-XXXX">
+      </div>
+      <div class="field">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" id="p-email" placeholder="carlos@aventura.cr">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Primary zone <span class="req">*</span></label>
+        <select id="p-zone">
+          <option value="">Select your main zone...</option>
+          <option>La Fortuna / Arenal</option>
+          <option>Monteverde</option>
+          <option>Manuel Antonio</option>
+          <option>Jacó</option>
+          <option>Tamarindo</option>
+          <option>Puerto Viejo</option>
+          <option>Cahuita</option>
+          <option>Playa Sámara</option>
+          <option>Santa Teresa / Mal País</option>
+          <option>San José</option>
+          <option>Multiple zones</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Website or Instagram <span class="opt">(optional)</span></label>
+        <input type="url" id="p-web" placeholder="instagram.com/miadventura">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Business registration</label>
+        <div class="radio-pills">
+          <div class="rpill"><input type="radio" name="legal" id="leg-j" value="Cédula jurídica"><label for="leg-j">Cédula jurídica</label></div>
+          <div class="rpill"><input type="radio" name="legal" id="leg-f" value="Persona física"><label for="leg-f">Persona física</label></div>
+          <div class="rpill"><input type="radio" name="legal" id="leg-n" value="Not yet registered"><label for="leg-n">Not yet registered</label></div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Liability insurance</label>
+        <div class="radio-pills">
+          <div class="rpill"><input type="radio" name="insurance" id="ins-y" value="Yes — active policy"><label for="ins-y">Yes — active</label></div>
+          <div class="rpill"><input type="radio" name="insurance" id="ins-p" value="In process"><label for="ins-p">In process</label></div>
+          <div class="rpill"><input type="radio" name="insurance" id="ins-n" value="Not yet"><label for="ins-n">Not yet</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Payout method preference</label>
+      <div class="radio-pills">
+        <div class="rpill"><input type="radio" name="payout" id="pay-s" value="SINPE Móvil"><label for="pay-s">SINPE Móvil</label></div>
+        <div class="rpill"><input type="radio" name="payout" id="pay-b" value="Bank transfer (CR)"><label for="pay-b">Bank transfer</label></div>
+        <div class="rpill"><input type="radio" name="payout" id="pay-p" value="PayPal"><label for="pay-p">PayPal</label></div>
+        <div class="rpill"><input type="radio" name="payout" id="pay-o" value="To be discussed"><label for="pay-o">Let's discuss</label></div>
+      </div>
+    </div>
   </div>
 
-  <div class="body">
-
-    <!-- SECTION 1: CONTACT -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">1</span> Contact information
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Full name <span class="required">*</span></label>
-          <input type="text" class="input-box" placeholder="Carlos Mora">
-        </div>
-        <div class="field">
-          <label class="label">Business name <span>(if different)</span></label>
-          <input type="text" class="input-box" placeholder="Aventuras Pacuare S.A.">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">WhatsApp <span class="required">*</span></label>
-          <input type="tel" class="input-box" placeholder="+506 XXXX-XXXX">
-        </div>
-        <div class="field">
-          <label class="label">Email <span class="required">*</span></label>
-          <input type="email" class="input-box" placeholder="carlos@aventura.cr">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Website or Instagram <span>(optional)</span></label>
-        <input type="text" class="input-box" placeholder="instagram.com/aventuraspacuare">
-      </div>
+  <!-- SECTION 2: EXPERIENCES -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-num">2</span>
+      Your experiences
+      <span style="font-size:12px;font-weight:400;color:var(--muted);margin-left:4px">— add as many as you offer</span>
     </div>
 
-    <!-- SECTION 2: ACTIVITY TYPE -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">2</span> Activity type <span style="font-weight:400;font-size:13px;color:#999;margin-left:6px">— select all that apply</span>
-      </div>
-
-      <div class="choice-grid choice-grid-3">
-        <div class="choice">
-          <input type="checkbox" id="cat-rafting" name="category" value="rafting">
-          <label for="cat-rafting">
-            <span class="icon">🌊</span>
-            <span class="name">Rafting / Kayak</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-canopy" name="category" value="canopy">
-          <label for="cat-canopy">
-            <span class="icon">🌲</span>
-            <span class="name">Canopy / Zipline</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-atv" name="category" value="atv">
-          <label for="cat-atv">
-            <span class="icon">🏍️</span>
-            <span class="name">ATVs / Off-road</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-hiking" name="category" value="hiking">
-          <label for="cat-hiking">
-            <span class="icon">⛰️</span>
-            <span class="name">Hiking / Trekking</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-surf" name="category" value="surf">
-          <label for="cat-surf">
-            <span class="icon">🏄</span>
-            <span class="name">Surf / Bodyboard</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-kayak" name="category" value="kayak">
-          <label for="cat-kayak">
-            <span class="icon">🚣</span>
-            <span class="name">Sea Kayak</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-wildlife" name="category" value="wildlife">
-          <label for="cat-wildlife">
-            <span class="icon">🐒</span>
-            <span class="name">Wildlife tours</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-volcano" name="category" value="volcano">
-          <label for="cat-volcano">
-            <span class="icon">🌋</span>
-            <span class="name">Volcano tours</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-waterfall" name="category" value="waterfall">
-          <label for="cat-waterfall">
-            <span class="icon">💧</span>
-            <span class="name">Waterfall hikes</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-bike" name="category" value="bike">
-          <label for="cat-bike">
-            <span class="icon">🚴</span>
-            <span class="name">Bike tours</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-transport" name="category" value="transport">
-          <label for="cat-transport">
-            <span class="icon">🚐</span>
-            <span class="name">Transportation</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-horseback" name="category" value="horseback">
-          <label for="cat-horseback">
-            <span class="icon">🐴</span>
-            <span class="name">Horseback riding</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-diving" name="category" value="diving">
-          <label for="cat-diving">
-            <span class="icon">🤿</span>
-            <span class="name">Diving / Snorkeling</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-fishing" name="category" value="fishing">
-          <label for="cat-fishing">
-            <span class="icon">🎣</span>
-            <span class="name">Sport fishing</span>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="checkbox" id="cat-cultural" name="category" value="cultural">
-          <label for="cat-cultural">
-            <span class="icon">🏛️</span>
-            <span class="name">Cultural / Food tours</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="field" style="margin-top:14px">
-        <label class="label">Not on the list? Describe your activity <span>(optional)</span></label>
-        <input type="text" class="input-box" id="cat-other-text" placeholder="e.g. Hot springs tour, paragliding, night walk, yoga retreat, cooking class...">
-        <p class="hint">We're open to any experience that's safe, legal and offers genuine value to travelers.</p>
-      </div>
+    <div id="experiences-container">
+      <!-- Experience blocks injected here -->
     </div>
 
-    <!-- SECTION 3: LOCATION -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">3</span> Location &amp; zone
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Primary zone <span class="required">*</span></label>
-          <select class="input-box">
-            <option value="">Select zone...</option>
-            <option>La Fortuna / Arenal</option>
-            <option>Monteverde</option>
-            <option>Manuel Antonio</option>
-            <option>Jacó</option>
-            <option>Tamarindo</option>
-            <option>Puerto Viejo</option>
-            <option>Cahuita</option>
-            <option>Playa Sámara</option>
-            <option>Santa Teresa / Mal País</option>
-            <option>San José</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="label">Meeting point / pickup location <span class="required">*</span></label>
-          <input type="text" class="input-box" placeholder="e.g. La Fortuna main park, or hotel pickup">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Do you offer hotel pickup?</label>
-        <div class="choice-grid choice-grid-3" style="margin-top:4px">
-          <div class="choice">
-            <input type="radio" id="pickup-yes" name="pickup" value="hotel">
-            <label for="pickup-yes"><span class="name">Yes — hotel pickup</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="pickup-meeting" name="pickup" value="meeting">
-            <label for="pickup-meeting"><span class="name">No — meeting point only</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="pickup-both" name="pickup" value="both">
-            <label for="pickup-both"><span class="name">Both options available</span></label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 4: EXPERIENCE DETAILS -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">4</span> Experience details
-      </div>
-
-      <div class="field">
-        <label class="label">Experience name <span class="required">*</span> <span>— what appears on the listing</span></label>
-        <input type="text" class="input-box" placeholder="e.g. Pacuare River Rafting — Class III/IV Full Day">
-      </div>
-
-      <div class="field">
-        <label class="label">Short description <span class="required">*</span> <span>— 2-3 sentences, in English</span></label>
-        <textarea class="textarea-box" placeholder="Describe what makes your experience unique. What will guests see, do and feel? Include any standout details like views, wildlife, or special moments."></textarea>
-      </div>
-
-      <div class="field">
-        <label class="label">What's included <span class="required">*</span></label>
-        <textarea class="textarea-box" style="min-height:70px" placeholder="e.g. Equipment, guide, safety briefing, lunch, photos, transport from meeting point..."></textarea>
-      </div>
-
-      <div class="field">
-        <label class="label">What's NOT included</label>
-        <textarea class="textarea-box" style="min-height:60px" placeholder="e.g. Personal travel insurance, alcoholic drinks, hotel pickup from outside La Fortuna..."></textarea>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Duration <span class="required">*</span></label>
-          <select class="input-box">
-            <option value="">Select...</option>
-            <option value="short">Under 2 hours</option>
-            <option value="half">2–4 hours (half day)</option>
-            <option value="half">4–6 hours (half day)</option>
-            <option value="full">6–8 hours (full day)</option>
-            <option value="full">8+ hours (full day)</option>
-            <option value="multi">Multi-day</option>
-          </select>
-        </div>
-        <div class="field">
-          <label class="label">Exact duration <span>(hours)</span></label>
-          <input type="text" class="input-box" placeholder="e.g. 4 hours, or 8 hours including lunch">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">What should guests bring / wear?</label>
-        <textarea class="textarea-box" style="min-height:60px" placeholder="e.g. Comfortable clothing, water shoes, sunscreen, change of clothes, water bottle..."></textarea>
-      </div>
-    </div>
-
-    <!-- SECTION 5: PHYSICAL EFFORT -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">5</span> Physical effort level
-      </div>
-
-      <div class="choice-grid choice-grid-2" style="gap:10px">
-        <div class="choice">
-          <input type="radio" id="effort-easy" name="effort" value="easy">
-          <label for="effort-easy" style="text-align:left;padding:14px 16px">
-            <span class="icon" style="display:inline;font-size:16px;margin-right:6px">😌</span>
-            <span class="name">Easy</span>
-            <div class="desc" style="text-align:left;margin-top:4px">No fitness required. Suitable for any age, including children and seniors. Mostly seated or walking on flat terrain.</div>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="radio" id="effort-moderate" name="effort" value="moderate">
-          <label for="effort-moderate" style="text-align:left;padding:14px 16px">
-            <span class="icon" style="display:inline;font-size:16px;margin-right:6px">🚶</span>
-            <span class="name">Moderate</span>
-            <div class="desc" style="text-align:left;margin-top:4px">Some physical activity. Light walking, paddling or riding. Suitable for most adults in average health. No prior experience needed.</div>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="radio" id="effort-active" name="effort" value="active">
-          <label for="effort-active" style="text-align:left;padding:14px 16px">
-            <span class="icon" style="display:inline;font-size:16px;margin-right:6px">🏃</span>
-            <span class="name">Active</span>
-            <div class="desc" style="text-align:left;margin-top:4px">Good fitness recommended. Extended hiking, moderate rapids or physical exertion involved. Not suitable for guests with mobility limitations.</div>
-          </label>
-        </div>
-        <div class="choice">
-          <input type="radio" id="effort-intense" name="effort" value="intense">
-          <label for="effort-intense" style="text-align:left;padding:14px 16px">
-            <span class="icon" style="display:inline;font-size:16px;margin-right:6px">💪</span>
-            <span class="name">Intense</span>
-            <div class="desc" style="text-align:left;margin-top:4px">Athletic level required. Steep terrain, strong currents or demanding physical activity. Prior experience or training recommended.</div>
-          </label>
-        </div>
-      </div>
-
-      <div class="field" style="margin-top:14px">
-        <label class="label">Minimum age <span class="required">*</span></label>
-        <input type="text" class="input-box" placeholder="e.g. No minimum, 8 years+, 16 years+, Adults only (18+)">
-      </div>
-
-      <div class="field">
-        <label class="label">Any health restrictions?</label>
-        <textarea class="textarea-box" style="min-height:60px" placeholder="e.g. Not suitable for guests with heart conditions, pregnancy, back injuries, or fear of heights..."></textarea>
-      </div>
-    </div>
-
-    <!-- SECTION 6: GROUP SIZE -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">6</span> Group size &amp; capacity
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Minimum guests per booking <span class="required">*</span></label>
-          <input type="number" class="input-box" placeholder="e.g. 1" min="1">
-        </div>
-        <div class="field">
-          <label class="label">Maximum guests per group <span class="required">*</span></label>
-          <input type="number" class="input-box" placeholder="e.g. 12" min="1">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Do you offer private tours?</label>
-        <div class="choice-grid choice-grid-3" style="margin-top:4px">
-          <div class="choice">
-            <input type="radio" id="private-yes" name="private" value="yes">
-            <label for="private-yes"><span class="name">Yes, at extra cost</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="private-always" name="private" value="always">
-            <label for="private-always"><span class="name">Always private</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="private-no" name="private" value="no">
-            <label for="private-no"><span class="name">No, shared groups only</span></label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 7: PRICING -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">7</span> Pricing
-      </div>
-
-      <div class="price-note">
-        💡 Prices should be in USD per person. ThrillCR will display these prices to international travelers. We'll discuss our commission together before going live — it's agreed individually.
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Price per person (USD) <span class="required">*</span></label>
-          <input type="number" class="input-box" placeholder="e.g. 85">
-        </div>
-        <div class="field">
-          <label class="label">Price per person in CRC <span>(optional)</span></label>
-          <input type="number" class="input-box" placeholder="e.g. 45000">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Private tour price <span>(if offered — total, not per person)</span></label>
-        <input type="text" class="input-box" placeholder="e.g. $350 total for up to 4 guests">
-      </div>
-
-      <div class="field">
-        <label class="label">Do you offer seasonal pricing or discounts?</label>
-        <textarea class="textarea-box" style="min-height:60px" placeholder="e.g. 10% off for groups of 8+, high season Dec–April, low season discount May–Nov..."></textarea>
-      </div>
-
-      <div class="field">
-        <label class="label">Cancellation policy preference</label>
-        <div class="choice-grid choice-grid-3" style="margin-top:4px">
-          <div class="choice">
-            <input type="radio" id="cancel-flex" name="cancel" value="flexible">
-            <label for="cancel-flex">
-              <span class="name">Flexible</span>
-              <span class="desc">Full refund up to 24h before</span>
-            </label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="cancel-mod" name="cancel" value="moderate">
-            <label for="cancel-mod">
-              <span class="name">Moderate</span>
-              <span class="desc">50% refund up to 5 days before</span>
-            </label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="cancel-strict" name="cancel" value="strict">
-            <label for="cancel-strict">
-              <span class="name">Strict</span>
-              <span class="desc">No refund once booked</span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 8: AVAILABILITY -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">8</span> Availability
-      </div>
-
-      <div class="field">
-        <label class="label">Days you operate <span class="required">*</span></label>
-        <div class="choice-grid" style="grid-template-columns:repeat(7,1fr);gap:6px;margin-top:4px">
-          <div class="choice">
-            <input type="checkbox" id="day-mon" name="days" value="mon">
-            <label for="day-mon"><span class="name">Mon</span></label>
-          </div>
-          <div class="choice">
-            <input type="checkbox" id="day-tue" name="days" value="tue">
-            <label for="day-tue"><span class="name">Tue</span></label>
-          </div>
-          <div class="choice">
-            <input type="checkbox" id="day-wed" name="days" value="wed">
-            <label for="day-wed"><span class="name">Wed</span></label>
-          </div>
-          <div class="choice">
-            <input type="checkbox" id="day-thu" name="days" value="thu">
-            <label for="day-thu"><span class="name">Thu</span></label>
-          </div>
-          <div class="choice">
-            <input type="checkbox" id="day-fri" name="days" value="fri">
-            <label for="day-fri"><span class="name">Fri</span></label>
-          </div>
-          <div class="choice">
-            <input type="checkbox" id="day-sat" name="days" value="sat">
-            <label for="day-sat"><span class="name">Sat</span></label>
-          </div>
-          <div class="choice">
-            <input type="checkbox" id="day-sun" name="days" value="sun">
-            <label for="day-sun"><span class="name">Sun</span></label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Tour start time(s) <span class="required">*</span></label>
-          <input type="text" class="input-box" placeholder="e.g. 7:00 AM and 1:00 PM">
-        </div>
-        <div class="field">
-          <label class="label">Advance booking required</label>
-          <input type="text" class="input-box" placeholder="e.g. At least 24 hours notice">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Blackout dates / closed seasons <span>(optional)</span></label>
-        <textarea class="textarea-box" style="min-height:60px" placeholder="e.g. Closed during Holy Week (Semana Santa), December 25-26, or any dates the river/trail is typically closed..."></textarea>
-      </div>
-    </div>
-
-    <!-- SECTION 9: PHOTOS -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">9</span> Photos
-      </div>
-
-      <div class="photo-requirements">
-        <div class="photo-req-title">📸 We need at least 5 real photos of your experience</div>
-        <ul class="photo-req-list">
-          <li>1 wide/landscape shot — shows the full setting (river, forest, beach, volcano)</li>
-          <li>1 action shot — guests actively doing the experience</li>
-          <li>1 guide/team photo — builds trust with travelers</li>
-          <li>1 close-up detail — equipment, wildlife, food, waterfall, anything memorable</li>
-          <li>1 group/social shot — guests smiling, celebrating, enjoying the moment</li>
-        </ul>
-      </div>
-
-      <div class="field">
-        <label class="label">How will you send us your photos?</label>
-        <div class="choice-grid choice-grid-2" style="margin-top:4px">
-          <div class="choice">
-            <input type="radio" id="photo-wa" name="photos" value="whatsapp">
-            <label for="photo-wa"><span class="name">WhatsApp</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="photo-email" name="photos" value="email">
-            <label for="photo-email"><span class="name">Email</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="photo-drive" name="photos" value="drive">
-            <label for="photo-drive"><span class="name">Google Drive / Dropbox link</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="photo-ig" name="photos" value="instagram">
-            <label for="photo-ig"><span class="name">From our Instagram</span></label>
-          </div>
-        </div>
-      </div>
-
-      <p class="hint">Please send photos at full quality / high resolution. Avoid heavy filters. No stock photos or screenshots.</p>
-    </div>
-
-    <!-- SECTION 10: LEGAL -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">10</span> Legal &amp; insurance
-      </div>
-
-      <div class="field">
-        <label class="label">Business registration <span class="required">*</span></label>
-        <div class="choice-grid choice-grid-2" style="margin-top:4px">
-          <div class="choice">
-            <input type="radio" id="legal-juridica" name="legal" value="juridica">
-            <label for="legal-juridica"><span class="name">Cédula jurídica (S.A. / SRL)</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="legal-fisica" name="legal" value="fisica">
-            <label for="legal-fisica"><span class="name">Persona física</span></label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label class="label">Cédula jurídica or ID number</label>
-          <input type="text" class="input-box" placeholder="e.g. 3-101-XXXXXX">
-        </div>
-        <div class="field">
-          <label class="label">Do you have liability insurance? <span class="required">*</span></label>
-          <select class="input-box">
-            <option value="">Select...</option>
-            <option value="yes">Yes — active policy</option>
-            <option value="getting">Getting it — in process</option>
-            <option value="no">Not yet</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Insurance provider / policy details <span>(if available)</span></label>
-        <input type="text" class="input-box" placeholder="e.g. INS policy #XXXXXX, valid through Dec 2025">
-      </div>
-
-      <div class="field">
-        <label class="label">Guide certifications <span>(optional but valued)</span></label>
-        <textarea class="textarea-box" style="min-height:60px" placeholder="e.g. ACA certified kayak guide, certified rafting guide, ICT licensed tour guide, wilderness first aid..."></textarea>
-      </div>
-    </div>
-
-    <!-- SECTION 11: PAYMENT -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">11</span> Payment details <span style="font-weight:400;font-size:13px;color:#999;margin-left:6px">— for your weekly payouts</span>
-      </div>
-
-      <div class="field">
-        <label class="label">Preferred payout method <span class="required">*</span></label>
-        <div class="choice-grid choice-grid-2" style="margin-top:4px">
-          <div class="choice">
-            <input type="radio" id="pay-sinpe" name="payment" value="sinpe">
-            <label for="pay-sinpe"><span class="name">SINPE Móvil</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="pay-bank" name="payment" value="bank">
-            <label for="pay-bank"><span class="name">Bank transfer (CR)</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="pay-paypal" name="payment" value="paypal">
-            <label for="pay-paypal"><span class="name">PayPal</span></label>
-          </div>
-          <div class="choice">
-            <input type="radio" id="pay-other" name="payment" value="other">
-            <label for="pay-other"><span class="name">Other (let's discuss)</span></label>
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">SINPE number or IBAN <span>(we keep this confidential)</span></label>
-        <input type="text" class="input-box" placeholder="e.g. +506 XXXX-XXXX or CR XXXX XXXX XXXX XXXX">
-      </div>
-    </div>
-
-    <!-- SECTION 12: ANYTHING ELSE -->
-    <div class="section">
-      <div class="section-title">
-        <span class="section-num">12</span> Anything else we should know?
-      </div>
-      <div class="field">
-        <textarea class="textarea-box" style="min-height:90px" placeholder="Special notes, seasonal variations, unique selling points, languages spoken by your guides, sustainability certifications, awards, anything that makes your experience stand out..."></textarea>
-      </div>
-    </div>
-
+    <button class="btn-add" onclick="addExperience()">
+      <span style="font-size:18px">+</span> Add another experience
+    </button>
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <div style="margin-bottom:16px">
-      <button class="submit-btn" onclick="sendForm()">Send via WhatsApp →</button>
+  <!-- SECTION 3: PHOTOS -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-num">3</span>
+      Photos
     </div>
-    <div class="footer-contact">
-      Questions? WhatsApp us: US +1 (786) 299-0675 · CR +506 7202-5116
+
+    <div style="background:#EBF5EE;border:1px solid #C8E6D4;border-radius:10px;padding:16px 18px;margin-bottom:18px">
+      <div style="font-size:13px;font-weight:700;color:var(--forest);margin-bottom:8px">📸 We need 5+ real photos per experience</div>
+      <div style="font-size:12px;color:#4a7a5a;line-height:1.7">
+        ✓ &nbsp;1 wide/landscape shot — shows the full setting<br>
+        ✓ &nbsp;1 action shot — guests actively doing the experience<br>
+        ✓ &nbsp;1 guide/team photo — builds trust with travelers<br>
+        ✓ &nbsp;1 close-up detail — equipment, wildlife, waterfall<br>
+        ✓ &nbsp;1 group/social shot — guests enjoying the moment
+      </div>
     </div>
-    <div class="footer-note" style="margin-top:8px">
-      Or email: partners@thrillcr.com · We'll review and follow up within 24 hours.
+
+    <div class="field">
+      <label>How will you send us your photos?</label>
+      <div class="radio-pills">
+        <div class="rpill"><input type="radio" name="photos" id="ph-wa" value="WhatsApp"><label for="ph-wa">WhatsApp</label></div>
+        <div class="rpill"><input type="radio" name="photos" id="ph-em" value="Email"><label for="ph-em">Email</label></div>
+        <div class="rpill"><input type="radio" name="photos" id="ph-dr" value="Google Drive / Dropbox"><label for="ph-dr">Drive / Dropbox link</label></div>
+        <div class="rpill"><input type="radio" name="photos" id="ph-ig" value="Instagram (we'll pull from there)"><label for="ph-ig">From Instagram</label></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Photo link or Instagram handle <span class="opt">(if applicable)</span></label>
+      <input type="text" id="photo-link" placeholder="drive.google.com/... or @myinstagram">
+    </div>
+
+    <div class="field">
+      <label>Anything else we should know? <span class="opt">(optional)</span></label>
+      <textarea id="p-notes" placeholder="Special notes, seasonal info, unique selling points, guide certifications, sustainability initiatives, languages spoken..."></textarea>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <div class="submit-title">Ready to send?</div>
+    <div class="submit-sub">We'll review everything and follow up within 24 hours to finalize your listing.</div>
+    <div class="submit-btns">
+      <button class="btn-wa" onclick="sendViaWhatsApp()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send via WhatsApp
+      </button>
+      <button class="btn-email" onclick="sendViaEmail()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Send via Email
+      </button>
+    </div>
+    <div class="submit-note">
+      Questions? WhatsApp: US +1 (786) 299-0675 · CR +506 7202-5116 · partners@thrillcr.com
     </div>
   </div>
 
 </div>
 
+<!-- SUCCESS SCREEN -->
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">✓</div>
+  <div class="success-title">Sent successfully!</div>
+  <div class="success-sub">We received your information and will reach out within 24 hours to finalize your listing on ThrillCR. Welcome aboard!</div>
+</div>
+
 <script>
-function sendForm() {
-  // Collect key fields for WhatsApp message
-  const inputs = document.querySelectorAll('.input-box, .textarea-box');
-  let summary = "Hi ThrillCR! Here's my provider onboarding info:\n\n";
+let expCount = 0;
 
-  const labels = document.querySelectorAll('.label');
-  inputs.forEach((input, i) => {
-    const label = labels[i];
-    if (label && input.value.trim()) {
-      summary += `${label.textContent.replace(/\*/g,'').trim()}: ${input.value.trim()}\n`;
-    }
-  });
+const ACTIVITIES = [
+  ['🌊','Rafting','rafting'],['🌲','Canopy / Zipline','canopy'],['🏍️','ATVs','atv'],
+  ['⛰️','Hiking / Trekking','hiking'],['🏄','Surf','surf'],['🚣','Sea Kayak','kayak'],
+  ['🐒','Wildlife tour','wildlife'],['🌋','Volcano tour','volcano'],['💧','Waterfall hike','waterfall'],
+  ['🚴','Bike tour','bike'],['🐴','Horseback riding','horseback'],['🤿','Diving / Snorkeling','diving'],
+  ['🎣','Sport fishing','fishing'],['🚐','Transportation','transport'],['🏛️','Cultural / Food tour','cultural'],
+];
 
-  // Add checked checkboxes/radios
-  const checked = document.querySelectorAll('input:checked');
-  let cats = [], days = [];
-  checked.forEach(el => {
-    if (el.name === 'category') cats.push(el.value);
-    if (el.name === 'days') days.push(el.value);
-  });
-  if (cats.length) summary += `\nActivities: ${cats.join(', ')}`;
-  if (days.length) summary += `\nDays: ${days.join(', ')}`;
+function addExperience() {
+  expCount++;
+  const id = expCount;
+  const container = document.getElementById('experiences-container');
 
-  const msg = encodeURIComponent(summary.substring(0, 1500)); // WA limit
-  window.open(`https://wa.me/17862990675?text=${msg}`, '_blank');
+  const html = `
+  <div class="exp-block" id="exp-${id}">
+    <div class="exp-block-header">
+      <div class="exp-num">
+        <div class="exp-badge">${id}</div>
+        <span>Experience #${id}</span>
+        <span class="exp-name-display" id="exp-name-display-${id}"></span>
+      </div>
+      ${id > 1 ? `<button class="btn-remove" onclick="removeExp(${id})">Remove</button>` : ''}
+    </div>
+
+    <div class="field">
+      <label>Activity type <span class="req">*</span></label>
+      <div class="chips" id="chips-${id}">
+        ${ACTIVITIES.map(([icon, name, val]) => `
+          <div class="chip">
+            <input type="checkbox" id="cat-${id}-${val}" name="cat-${id}" value="${name}" onchange="updateExpName(${id})">
+            <label for="cat-${id}-${val}">${icon} ${name}</label>
+          </div>`).join('')}
+        <div class="chip">
+          <input type="checkbox" id="cat-${id}-other" name="cat-${id}" value="Other" onchange="toggleOther(${id})">
+          <label for="cat-${id}-other">✨ Other</label>
+        </div>
+      </div>
+      <input type="text" id="other-text-${id}" placeholder="Describe your activity..." style="display:none;margin-top:8px" oninput="updateExpName(${id})">
+    </div>
+
+    <div class="field">
+      <label>Experience name <span class="req">*</span> <span class="opt">— as it will appear on ThrillCR</span></label>
+      <input type="text" id="exp-name-${id}" placeholder="e.g. Pacuare River Rafting — Class III/IV Full Day" oninput="updateExpName(${id})">
+    </div>
+
+    <div class="field">
+      <label>Description <span class="req">*</span> <span class="opt">— in English, 2–3 sentences</span></label>
+      <textarea id="exp-desc-${id}" placeholder="What makes this experience unique? What will guests see, do and feel?"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Price per person (USD) <span class="req">*</span></label>
+        <input type="number" id="exp-price-${id}" placeholder="85" min="1">
+      </div>
+      <div class="field">
+        <label>Duration</label>
+        <select id="exp-dur-${id}">
+          <option value="">Select...</option>
+          <option>Under 2 hours</option>
+          <option>2–4 hours (half day)</option>
+          <option>4–6 hours (half day)</option>
+          <option>6–8 hours (full day)</option>
+          <option>8+ hours (full day)</option>
+          <option>Multi-day</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Min. group size</label>
+        <input type="number" id="exp-min-${id}" placeholder="1" min="1">
+      </div>
+      <div class="field">
+        <label>Max. group size</label>
+        <input type="number" id="exp-max-${id}" placeholder="12" min="1">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Physical effort level</label>
+      <div class="radio-pills">
+        <div class="rpill"><input type="radio" name="effort-${id}" id="eff-${id}-easy" value="Easy — suitable for all ages"><label for="eff-${id}-easy">😌 Easy</label></div>
+        <div class="rpill"><input type="radio" name="effort-${id}" id="eff-${id}-mod" value="Moderate — light fitness needed"><label for="eff-${id}-mod">🚶 Moderate</label></div>
+        <div class="rpill"><input type="radio" name="effort-${id}" id="eff-${id}-act" value="Active — good fitness required"><label for="eff-${id}-act">🏃 Active</label></div>
+        <div class="rpill"><input type="radio" name="effort-${id}" id="eff-${id}-int" value="Intense — athletic level"><label for="eff-${id}-int">💪 Intense</label></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Pickup</label>
+      <div class="radio-pills">
+        <div class="rpill"><input type="radio" name="pickup-${id}" id="pu-${id}-h" value="Hotel pickup available"><label for="pu-${id}-h">🏨 Hotel pickup</label></div>
+        <div class="rpill"><input type="radio" name="pickup-${id}" id="pu-${id}-m" value="Meeting point only"><label for="pu-${id}-m">📍 Meeting point</label></div>
+        <div class="rpill"><input type="radio" name="pickup-${id}" id="pu-${id}-b" value="Both available"><label for="pu-${id}-b">Both</label></div>
+      </div>
+    </div>
+
+    <div class="section-divider">Availability</div>
+
+    <div class="field">
+      <label>Days you run this experience</label>
+      <div class="day-pills">
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-mo" value="Mon"><label for="d-${id}-mo">Mo</label></div>
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-tu" value="Tue"><label for="d-${id}-tu">Tu</label></div>
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-we" value="Wed"><label for="d-${id}-we">We</label></div>
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-th" value="Thu"><label for="d-${id}-th">Th</label></div>
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-fr" value="Fri"><label for="d-${id}-fr">Fr</label></div>
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-sa" value="Sat"><label for="d-${id}-sa">Sa</label></div>
+        <div class="dpill"><input type="checkbox" name="days-${id}" id="d-${id}-su" value="Sun"><label for="d-${id}-su">Su</label></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Start time(s)</label>
+        <input type="text" id="exp-time-${id}" placeholder="e.g. 7:00 AM and 1:00 PM">
+      </div>
+      <div class="field">
+        <label>Cancellation policy</label>
+        <select id="exp-cancel-${id}">
+          <option value="">Select...</option>
+          <option>Flexible — full refund up to 24h before</option>
+          <option>Moderate — 50% refund up to 5 days before</option>
+          <option>Strict — no refund once booked</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>What's included</label>
+      <textarea id="exp-inc-${id}" placeholder="Equipment, guide, safety briefing, lunch, photos..." style="min-height:56px"></textarea>
+    </div>
+
+    <div class="field">
+      <label>What's NOT included <span class="opt">(optional)</span></label>
+      <textarea id="exp-exc-${id}" placeholder="Personal insurance, alcoholic drinks..." style="min-height:48px"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Minimum age / health restrictions <span class="opt">(optional)</span></label>
+      <input type="text" id="exp-age-${id}" placeholder="e.g. 8 years+, not suitable for guests with heart conditions">
+    </div>
+  </div>`;
+
+  container.insertAdjacentHTML('beforeend', html);
+
+  // Scroll to new block
+  setTimeout(() => {
+    document.getElementById(`exp-${id}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
 }
+
+function removeExp(id) {
+  document.getElementById(`exp-${id}`).remove();
+}
+
+function toggleOther(id) {
+  const cb = document.getElementById(`cat-${id}-other`);
+  const input = document.getElementById(`other-text-${id}`);
+  input.style.display = cb.checked ? 'block' : 'none';
+}
+
+function updateExpName(id) {
+  const nameInput = document.getElementById(`exp-name-${id}`);
+  const display = document.getElementById(`exp-name-display-${id}`);
+  if (display && nameInput) {
+    display.textContent = nameInput.value ? `— ${nameInput.value}` : '';
+  }
+}
+
+function collectData() {
+  // Provider info
+  const provider = {
+    name: val('p-name'),
+    biz: val('p-biz'),
+    phone: val('p-phone'),
+    email: val('p-email'),
+    zone: val('p-zone'),
+    web: val('p-web'),
+    legal: radioVal('legal'),
+    insurance: radioVal('insurance'),
+    payout: radioVal('payout'),
+    photos: radioVal('photos'),
+    photoLink: val('photo-link'),
+    notes: val('p-notes'),
+  };
+
+  // Experiences
+  const experiences = [];
+  for (let i = 1; i <= expCount; i++) {
+    const block = document.getElementById(`exp-${i}`);
+    if (!block) continue;
+
+    const cats = [...document.querySelectorAll(`input[name="cat-${i}"]:checked`)].map(el => el.value);
+    const otherText = val(`other-text-${i}`);
+    if (otherText) cats.push(otherText);
+
+    const days = [...document.querySelectorAll(`input[name="days-${i}"]:checked`)].map(el => el.value);
+
+    experiences.push({
+      name: val(`exp-name-${i}`),
+      categories: cats,
+      desc: val(`exp-desc-${i}`),
+      price: val(`exp-price-${i}`),
+      duration: val(`exp-dur-${i}`),
+      minGroup: val(`exp-min-${i}`),
+      maxGroup: val(`exp-max-${i}`),
+      effort: radioVal(`effort-${i}`),
+      pickup: radioVal(`pickup-${i}`),
+      days: days,
+      time: val(`exp-time-${i}`),
+      cancel: val(`exp-cancel-${i}`),
+      included: val(`exp-inc-${i}`),
+      excluded: val(`exp-exc-${i}`),
+      ageReq: val(`exp-age-${i}`),
+    });
+  }
+
+  return { provider, experiences };
+}
+
+function buildMessage({ provider: p, experiences }) {
+  let msg = `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `🌿 THRILLCR PARTNER APPLICATION\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  msg += `👤 PROVIDER INFO\n`;
+  msg += `Name: ${p.name}\n`;
+  if (p.biz) msg += `Business: ${p.biz}\n`;
+  msg += `WhatsApp: ${p.phone}\n`;
+  msg += `Email: ${p.email}\n`;
+  msg += `Zone: ${p.zone}\n`;
+  if (p.web) msg += `Web/IG: ${p.web}\n`;
+  if (p.legal) msg += `Legal: ${p.legal}\n`;
+  if (p.insurance) msg += `Insurance: ${p.insurance}\n`;
+  if (p.payout) msg += `Payout: ${p.payout}\n`;
+  if (p.photos) msg += `Photos via: ${p.photos}\n`;
+  if (p.photoLink) msg += `Photo link: ${p.photoLink}\n`;
+
+  msg += `\n`;
+
+  experiences.forEach((exp, i) => {
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `🎯 EXPERIENCE #${i + 1}`;
+    if (exp.name) msg += `: ${exp.name}`;
+    msg += `\n`;
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    if (exp.categories.length) msg += `Type: ${exp.categories.join(', ')}\n`;
+    if (exp.desc) msg += `Description: ${exp.desc}\n`;
+    if (exp.price) msg += `Price: $${exp.price} USD / person\n`;
+    if (exp.duration) msg += `Duration: ${exp.duration}\n`;
+    if (exp.minGroup || exp.maxGroup) msg += `Group size: ${exp.minGroup || '1'} – ${exp.maxGroup || '?'} guests\n`;
+    if (exp.effort) msg += `Physical effort: ${exp.effort}\n`;
+    if (exp.pickup) msg += `Pickup: ${exp.pickup}\n`;
+    if (exp.days.length) msg += `Days: ${exp.days.join(', ')}\n`;
+    if (exp.time) msg += `Start time: ${exp.time}\n`;
+    if (exp.cancel) msg += `Cancellation: ${exp.cancel}\n`;
+    if (exp.included) msg += `Included: ${exp.included}\n`;
+    if (exp.excluded) msg += `Not included: ${exp.excluded}\n`;
+    if (exp.ageReq) msg += `Age/restrictions: ${exp.ageReq}\n`;
+    msg += `\n`;
+  });
+
+  if (p.notes) {
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `📝 ADDITIONAL NOTES\n`;
+    msg += `${p.notes}\n\n`;
+  }
+
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `Submitted via thrillcr.com/onboarding`;
+
+  return msg;
+}
+
+function validate() {
+  const name = val('p-name');
+  const phone = val('p-phone');
+  const email = val('p-email');
+
+  if (!name || !phone || !email) {
+    alert('Please fill in your name, WhatsApp and email before sending.');
+    return false;
+  }
+
+  if (expCount === 0) {
+    alert('Please add at least one experience before sending.');
+    return false;
+  }
+
+  return true;
+}
+
+function sendViaWhatsApp() {
+  if (!validate()) return;
+  const data = collectData();
+  const msg = buildMessage(data);
+  // WA has a ~4000 char limit for URL, truncate gracefully
+  const encoded = encodeURIComponent(msg.substring(0, 3800));
+  window.open(`https://wa.me/17862990675?text=${encoded}`, '_blank');
+  showSuccess();
+}
+
+function sendViaEmail() {
+  if (!validate()) return;
+  const data = collectData();
+  const msg = buildMessage(data);
+  const subject = encodeURIComponent(`ThrillCR Partner Application — ${data.provider.name}`);
+  const body = encodeURIComponent(msg);
+  window.location.href = `mailto:partners@thrillcr.com?subject=${subject}&body=${body}`;
+  showSuccess();
+}
+
+function showSuccess() {
+  setTimeout(() => {
+    document.getElementById('main-page').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+    window.scrollTo(0, 0);
+  }, 600);
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function radioVal(name) {
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : '';
+}
+
+// Start with one experience block
+addExperience();
 </script>
 </body>
 </html>
