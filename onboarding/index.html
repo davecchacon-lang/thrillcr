@@ -506,8 +506,9 @@ textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
       method="POST"
       onsubmit="handleSubmit(event)"
     >
+      <input type="hidden" name="_replyto"       id="fs-replyto">
+      <input type="hidden" name="email"          id="fs-email">
       <input type="hidden" name="provider_name"  id="fs-provider-name">
-      <input type="hidden" name="provider_email" id="fs-provider-email">
       <input type="hidden" name="provider_phone" id="fs-provider-phone">
       <input type="hidden" name="provider_zone"  id="fs-provider-zone">
       <input type="hidden" name="summary"        id="fs-summary">
@@ -856,12 +857,13 @@ async function handleSubmit(event) {
   const msg = buildMessage(data);
 
   // Populate hidden fields
+  document.getElementById('fs-replyto').value        = data.provider.email;
+  document.getElementById('fs-email').value          = data.provider.email;
   document.getElementById('fs-provider-name').value  = data.provider.name;
-  document.getElementById('fs-provider-email').value = data.provider.email;
   document.getElementById('fs-provider-phone').value = data.provider.phone;
   document.getElementById('fs-provider-zone').value  = data.provider.zone;
-  document.getElementById('fs-summary').value        = msg;
-  document.getElementById('fs-subject').value        = `ThrillCR Partner Application — ${data.provider.name}`;
+  document.getElementById('fs-summary').value        = msg.substring(0, 5000);
+  document.getElementById('fs-subject').value        = 'ThrillCR Partner Application — ' + data.provider.name;
 
   // Show loading state
   btn.disabled = true;
