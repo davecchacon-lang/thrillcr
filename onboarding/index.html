@@ -499,23 +499,29 @@ textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
     <div class="submit-title">Ready to send?</div>
     <div class="submit-sub">We'll review your application and follow up within 24 hours to finalize your listing.</div>
 
-    <!-- Hidden Formspree form — data injected by JS on submit -->
-    <form id="fs-form" data-fs-success style="display:none">
-      <input name="summary" id="fs-summary">
-      <input name="provider_name" id="fs-provider-name">
-      <input name="provider_email" id="fs-provider-email">
-      <input name="provider_phone" id="fs-provider-phone">
-      <input name="provider_zone" id="fs-provider-zone">
+    <!-- Formspree form with action, method POST, and name attributes -->
+    <form
+      id="fs-form"
+      action="https://formspree.io/f/mwvawooq"
+      method="POST"
+      onsubmit="handleSubmit(event)"
+    >
+      <input type="hidden" name="provider_name"  id="fs-provider-name">
+      <input type="hidden" name="provider_email" id="fs-provider-email">
+      <input type="hidden" name="provider_phone" id="fs-provider-phone">
+      <input type="hidden" name="provider_zone"  id="fs-provider-zone">
+      <input type="hidden" name="summary"        id="fs-summary">
+      <input type="hidden" name="_subject"       id="fs-subject">
+
+      <div class="submit-btns">
+        <button type="submit" class="btn-wa" id="submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          <span id="submit-label">Submit application</span>
+        </button>
+      </div>
+
+      <div id="submit-error" style="display:none;color:#ffaaaa;font-size:13px;margin-top:12px"></div>
     </form>
-
-    <div class="submit-btns">
-      <button class="btn-wa" id="submit-btn" onclick="handleSubmit()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-        <span id="submit-label">Submit application</span>
-      </button>
-    </div>
-
-    <div id="submit-error" style="display:none;color:#ffaaaa;font-size:13px;margin-top:12px"></div>
 
     <div class="submit-note">
       Questions? WhatsApp: US +1 (786) 299-0675 · CR +506 7202-5116 · partners@thrillcr.com
@@ -837,47 +843,46 @@ function showSuccess() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-async function handleSubmit() {
+async function handleSubmit(event) {
+  event.preventDefault();
   if (!validate()) return;
 
   const btn = document.getElementById('submit-btn');
   const label = document.getElementById('submit-label');
   const errDiv = document.getElementById('submit-error');
 
-  // Collect and build message
+  // Collect data and build readable summary
   const data = collectData();
   const msg = buildMessage(data);
 
-  // Fill hidden Formspree fields
-  document.getElementById('fs-summary').value = msg;
-  document.getElementById('fs-provider-name').value = data.provider.name;
+  // Populate hidden fields
+  document.getElementById('fs-provider-name').value  = data.provider.name;
   document.getElementById('fs-provider-email').value = data.provider.email;
   document.getElementById('fs-provider-phone').value = data.provider.phone;
-  document.getElementById('fs-provider-zone').value = data.provider.zone;
+  document.getElementById('fs-provider-zone').value  = data.provider.zone;
+  document.getElementById('fs-summary').value        = msg;
+  document.getElementById('fs-subject').value        = `ThrillCR Partner Application — ${data.provider.name}`;
 
-  // Disable button + show loading
+  // Show loading state
   btn.disabled = true;
   label.textContent = 'Sending...';
   errDiv.style.display = 'none';
 
   try {
+    const form = document.getElementById('fs-form');
+    const formData = new FormData(form);
+
     const response = await fetch('https://formspree.io/f/mwvawooq', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        provider_name:  data.provider.name,
-        provider_email: data.provider.email,
-        provider_phone: data.provider.phone,
-        provider_zone:  data.provider.zone,
-        summary:        msg,
-      })
+      body: formData,
+      headers: { 'Accept': 'application/json' }
     });
 
     if (response.ok) {
       showSuccess();
     } else {
-      const json = await response.json();
-      errDiv.textContent = json.error || 'Something went wrong. Please try again or contact us directly.';
+      const json = await response.json().catch(() => ({}));
+      errDiv.textContent = json.error || 'Something went wrong. Please try again or contact us directly at partners@thrillcr.com';
       errDiv.style.display = 'block';
       btn.disabled = false;
       label.textContent = 'Submit application';
