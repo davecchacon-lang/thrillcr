@@ -477,12 +477,18 @@ async function fetchTour(id) {
   const providers = await provRes.json();
   const provider = providers[0] || {};
 
-  // Fetch similar tours (same zone, different id, limit 4)
-  const simRes = await fetch(
-    `${SUPABASE_URL}/rest/v1/tours?provider_id=eq.${tour.provider_id}&id=neq.${id}&active=eq.true&select=id,title_en,title_es,rack_usd,iva_rate,photo_url,zone&limit=4`,
-    { headers }
-  );
-  const similar = await simRes.json();
+  // Fetch similar tours (same provider, different id, limit 4)
+  let similar = [];
+  try {
+    const simRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/tours?provider_id=eq.${tour.provider_id}&id=neq.${id}&active=eq.true&select=id,title_en,title_es,rack_usd,iva_rate,photo_url,zone&limit=4`,
+      { headers }
+    );
+    const simData = await simRes.json();
+    similar = Array.isArray(simData) ? simData : [];
+  } catch(e) {
+    console.warn('Similar tours fetch failed:', e);
+  }
 
   return { tour, provider, similar };
 }
@@ -496,7 +502,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { tour, provider, similar } = await fetchTour(id);
     TOUR = tour;
     PROVIDER = provider;
-    PRICE_PER_PERSON = +(tour.rack_usd * (1 + (tour.iva_rate || 0.13)));
+    PRICE_PER_PERSON = +(parseFloat(tour.rack_usd) * (1 + parseFloat(tour.iva_rate || 0.13)));
+
+    // Ensure JSONB array fields are proper arrays
+    const jsonbFields = ['highlights','included','not_included','what_to_bring','start_times','itinerary','important_info','reviews'];
+    jsonbFields.forEach(f => {
+      if (!tour[f]) tour[f] = [];
+      else if (typeof tour[f] === 'string') {
+        try { tour[f] = JSON.parse(tour[f]); } catch(e) { tour[f] = []; }
+      }
+      if (!Array.isArray(tour[f])) tour[f] = [];
+    });
 
     renderPage(tour, provider, similar);
 
@@ -640,8 +656,9 @@ function renderPage(t, p, similar) {
 
   // Similar
   const simGrid = document.getElementById('similar-grid');
-  simGrid.innerHTML = (similar || []).slice(0, 4).map(s => {
-    const price = +(s.rack_usd * (1 + (s.iva_rate || 0.13))).toFixed(2);
+  const similarArray = Array.isArray(similar) ? similar : [];
+  simGrid.innerHTML = similarArray.slice(0, 4).map(s => {
+    const price = +(parseFloat(s.rack_usd) * (1 + parseFloat(s.iva_rate || 0.13))).toFixed(2);
     return `<a href="experience.html?id=${s.id}" class="sim-card">
       <img class="sim-card-img" src="${s.photo_url || photo}" alt="${s.title_en}" loading="lazy">
       <div class="sim-card-zone">${s.zone}</div>
