@@ -81,11 +81,11 @@ nav {
 .share-btn:hover { border-color: var(--ink); }
 
 /* GALLERY */
-.gallery { margin-top: 68px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 360px; gap: 4px; overflow: hidden; }
-.gallery-main { position: relative; overflow: hidden; cursor: pointer; }
+.gallery { margin-top: 68px; display: grid; grid-template-columns: 1fr 1fr; height: 400px; gap: 4px; overflow: hidden; }
+.gallery-main { position: relative; overflow: hidden; cursor: pointer; height: 400px; }
 .gallery-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
 .gallery-main:hover img { transform: scale(1.03); }
-.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px; }
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px; height: 400px; }
 .gallery-thumb { position: relative; overflow: hidden; cursor: pointer; }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
 .gallery-thumb:hover img { transform: scale(1.05); }
@@ -461,7 +461,7 @@ async function fetchTour(id) {
 
   // Fetch tour
   const tourRes = await fetch(
-    `${SUPABASE_URL}/rest/v1/tours?id=eq.${id}&select=*`,
+    `${SUPABASE_URL}/rest/v1/tours?id=eq.${id}&select=*,providers(name,since_year,zone,google_rating,google_reviews)`,
     { headers }
   );
   if (!tourRes.ok) throw new Error('Tour fetch failed: ' + tourRes.status);
@@ -469,13 +469,15 @@ async function fetchTour(id) {
   if (!tours.length) throw new Error('Tour not found: ' + id);
   const tour = tours[0];
 
-  // Fetch provider
+  // Fetch provider (also available via join above, but fetch separately for full data)
   const provRes = await fetch(
     `${SUPABASE_URL}/rest/v1/providers?id=eq.${tour.provider_id}&select=*`,
     { headers }
   );
   const providers = await provRes.json();
-  const provider = providers[0] || {};
+  const provider = providers[0] || tour.providers || {};
+  // Ensure zone is available on the tour from provider
+  if (!tour.zone && provider.zone) tour.zone = provider.zone;
 
   // Fetch similar tours (same provider, different id, limit 4)
   let similar = [];
@@ -539,15 +541,15 @@ function renderPage(t, p, similar) {
 
   // Nav
   document.getElementById('nav-tour-name').textContent = t.title_en;
-  document.getElementById('nav-tour-location').textContent = `📍 ${t.zone}, Costa Rica`;
+  document.getElementById('nav-tour-location').textContent = `📍 ${t.zone || p.zone || 'Manuel Antonio'}, Costa Rica`;
 
   // Breadcrumb
-  document.getElementById('bc-zone').textContent = t.zone;
+  document.getElementById('bc-zone').textContent = t.zone || p.zone || 'Costa Rica';
   document.getElementById('bc-tour').textContent = t.title_en;
 
   // Badges
   document.getElementById('badge-cat').textContent = `${t.badge_icon || '🎯'} ${t.badge_label || t.category}`;
-  document.getElementById('badge-zone').textContent = `📍 ${t.zone}`;
+  document.getElementById('badge-zone').textContent = `📍 ${t.zone || p.zone || 'Costa Rica'}`;
 
   // Title
   document.getElementById('exp-title').textContent = t.title_en;
@@ -573,7 +575,7 @@ function renderPage(t, p, similar) {
   // Provider
   document.getElementById('provider-avatar').textContent = (p.name || 'T')[0];
   document.getElementById('provider-name').textContent = p.name || 'Tucanes Tours';
-  document.getElementById('provider-since').textContent = `Operating since ${p.since_year || 2011} · ${t.zone}`;
+  document.getElementById('provider-since').textContent = `Operating since ${p.since_year || 2011} · ${t.zone || p.zone || 'Costa Rica'}`;
 
   // Description
   document.getElementById('exp-description').textContent = t.description_en || '';
@@ -632,16 +634,26 @@ function renderPage(t, p, similar) {
   // Reviews
   renderReviews(reviews, p);
 
-  // Photos
-  const photo = t.photo_url || 'https://images.pexels.com/photos/2739015/pexels-photo-2739015.jpeg?auto=compress&cs=tinysrgb&w=800';
+  // Photos — category fallbacks
+  const categoryPhotos = {
+    rafting:   'https://images.pexels.com/photos/2861659/pexels-photo-2861659.jpeg?auto=compress&cs=tinysrgb&w=800',
+    canopy:    'https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg?auto=compress&cs=tinysrgb&w=800',
+    surf:      'https://images.pexels.com/photos/390051/surfer-wave-sunset-the-indian-ocean-390051.jpeg?auto=compress&cs=tinysrgb&w=800',
+    kayak:     'https://images.pexels.com/photos/1497584/pexels-photo-1497584.jpeg?auto=compress&cs=tinysrgb&w=800',
+    horseback: 'https://images.pexels.com/photos/1236701/pexels-photo-1236701.jpeg?auto=compress&cs=tinysrgb&w=800',
+    wildlife:  'https://images.pexels.com/photos/1123771/pexels-photo-1123771.jpeg?auto=compress&cs=tinysrgb&w=800',
+    cultural:  'https://images.pexels.com/photos/2820884/pexels-photo-2820884.jpeg?auto=compress&cs=tinysrgb&w=800',
+    fishing:   'https://images.pexels.com/photos/1430676/pexels-photo-1430676.jpeg?auto=compress&cs=tinysrgb&w=800',
+    hiking:    'https://images.pexels.com/photos/2739015/pexels-photo-2739015.jpeg?auto=compress&cs=tinysrgb&w=800',
+  };
+  const photo = t.photo_url || categoryPhotos[t.category] || 'https://images.pexels.com/photos/2739015/pexels-photo-2739015.jpeg?auto=compress&cs=tinysrgb&w=800';
   document.getElementById('hero-img').src = photo;
   document.getElementById('hero-img').alt = t.title_en;
   document.getElementById('booking-img').src = photo;
   document.getElementById('booking-img').alt = t.title_en;
-  ['gallery-1','gallery-2','gallery-3','gallery-4'].forEach(id => {
-    const el = document.getElementById(id);
-    el.src = photo;
-    el.alt = t.title_en;
+  ['gallery-1','gallery-2','gallery-3','gallery-4'].forEach(gid => {
+    const el = document.getElementById(gid);
+    if (el) { el.src = photo; el.alt = t.title_en; }
   });
 
   // Booking card price
