@@ -190,7 +190,7 @@ const TOURS = {
       { type: "warning", icon: "🌧️", title: { en: "Rainy season only", es: "Solo temporada lluviosa" }, body: { en: "This tour only operates May–December.", es: "Este tour solo opera de mayo a diciembre." } },
       { type: "info", icon: "🧒", title: { en: "Minimum age: 10 years", es: "Edad mínima: 10 años" }, body: { en: "Children must be at least 10 years old.", es: "Los niños deben tener al menos 10 años." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/2861659/pexels-photo-2861659.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-004": {
@@ -475,7 +475,7 @@ const TOURS = {
     whatToBring: ["🦟 Mosquito repellent", "👟 Closed-toe shoes", "👕 Long sleeves recommended", "📷 Camera with night mode"],
     itinerary: [],
     importantInfo: [],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/975771/pexels-photo-975771.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-012": {
@@ -513,7 +513,7 @@ const TOURS = {
       { type: "warning", icon: "📅", title: { en: "Seasonal: July 15 – Oct 15 only", es: "Temporada: solo jul 15 – oct 15" }, body: { en: "This tour only operates during whale migration season.", es: "Este tour solo opera durante la temporada de migración de ballenas." } },
       { type: "info", icon: "👥", title: { en: "Minimum 4 guests", es: "Mínimo 4 personas" }, body: { en: "Minimum 4 guests, or pay equivalent of 4 rates.", es: "Mínimo 4 personas, o pagar equivalente a 4 tarifas." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/2547565/pexels-photo-2547565.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-013": {
@@ -548,7 +548,7 @@ const TOURS = {
     importantInfo: [
       { type: "info", icon: "🌊", title: { en: "Tide-dependent schedule", es: "Horario según marea" }, body: { en: "Start time confirmed when booking.", es: "Horario confirmado al reservar." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/1497584/pexels-photo-1497584.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-014": {
@@ -584,7 +584,7 @@ const TOURS = {
     importantInfo: [
       { type: "info", icon: "👥", title: { en: "Minimum 4 guests", es: "Mínimo 4 personas" }, body: { en: "Min 4 guests or pay equivalent of 4 rates.", es: "Mín 4 personas o pagar equivalente a 4 tarifas." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/1123771/pexels-photo-1123771.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-015": {
@@ -655,7 +655,7 @@ const TOURS = {
     importantInfo: [
       { type: "info", icon: "🥗", title: { en: "Vegetarian friendly", es: "Apto para vegetarianos" }, body: { en: "Vegetarian options always available. Let us know when booking.", es: "Opciones vegetarianas siempre disponibles. Avisanos al reservar." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/2733918/pexels-photo-2733918.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-017": {
@@ -696,7 +696,7 @@ const TOURS = {
       { type: "warning", icon: "📋", title: { en: "Fishing license not included", es: "Licencia de pesca no incluida" }, body: { en: "Fishing licenses are required and not included in the price.", es: "Las licencias de pesca son requeridas y no están incluidas." } },
       { type: "info", icon: "⚓", title: { en: "Price per boat — up to 4 anglers", es: "Precio por lancha — hasta 4 pescadores" }, body: { en: "The price covers the full charter for 1-4 anglers.", es: "El precio cubre la lancha completa para 1-4 pescadores." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/1430676/pexels-photo-1430676.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-018": {
@@ -734,7 +734,7 @@ const TOURS = {
     importantInfo: [
       { type: "info", icon: "⚓", title: { en: "Price per boat — up to 4 anglers", es: "Precio por lancha" }, body: { en: "The price covers the full charter for 1-4 anglers.", es: "El precio cubre la lancha para 1-4 pescadores." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/1430676/pexels-photo-1430676.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-019": {
@@ -766,7 +766,7 @@ const TOURS = {
     whatToBring: ["☀️ Sunscreen", "🕶️ Sunglasses", "🧢 Hat/visor", "📷 Waterproof camera", "🦟 Mosquito repellent"],
     itinerary: [],
     importantInfo: [],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/2499699/pexels-photo-2499699.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-020": {
@@ -802,7 +802,7 @@ const TOURS = {
     importantInfo: [
       { type: "info", icon: "🌅", title: { en: "Very early start: 5:00 AM", es: "Salida muy temprana: 5:00 AM" }, body: { en: "Early start is essential for bird watching — most activity at dawn.", es: "La salida temprana es esencial — mayor actividad al amanecer." } }
     ],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/349758/hummingbird-bird-birds-349758.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-021": {
@@ -834,7 +834,7 @@ const TOURS = {
     whatToBring: ["☀️ Suntan lotion", "📷 Camera", "🕶️ Sunglasses", "👟 Hiking shoes", "🩱 Bathing suit", "🏖️ Beach towel", "👕 Extra clothes"],
     itinerary: [],
     importantInfo: [],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   },
 
   "TUC-022": {
@@ -868,7 +868,7 @@ const TOURS = {
     whatToBring: ["☀️ Suntan lotion", "📷 Camera", "🕶️ Sunglasses", "👟 Hiking shoes", "🩱 Bathing suit", "🏖️ Beach towel", "👕 Extra clothes"],
     itinerary: [],
     importantInfo: [],
-    photo: null, galleryPhotos: []
+    photo: "https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg?auto=compress&cs=tinysrgb&w=800", galleryPhotos: []
   }
 
 };
